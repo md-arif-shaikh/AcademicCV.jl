@@ -1,0 +1,15 @@
+- degree: "Ph.D. in Computer Science"
+  institution: "University of Technology"
+  location: "City, Country"
+  year: "2018"
+  thesis: "Machine Learning Applications in Data Analysis"
+
+- degree: "M.S. in Computer Science"
+  institution: "University of Science"
+  location: "City, Country"
+  year: "2014"
+
+- degree: "B.S. in Computer Science"
+  institution: "University of Engineering"
+  location: "City, Country"
+  year: "2012"

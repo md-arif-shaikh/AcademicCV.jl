@@ -7,6 +7,12 @@ authors = ["md-arif-shaikh"]
 YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
 Mustache = "ffc61752-8dc7-55ee-8c37-f3e9cdd09e70"
 
+[extras]
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
+
+[targets]
+test = ["Test"]
+
 [compat]
 julia = "1.6"
 YAML = "0.4"

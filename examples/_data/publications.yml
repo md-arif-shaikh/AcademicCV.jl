@@ -1,0 +1,16 @@
+- title: "Machine Learning for Scientific Discovery"
+  authors: "Author Name, Co-Author Name"
+  journal: "Journal of Machine Learning Research"
+  year: "2021"
+  doi: "10.1234/jmlr.2021.001"
+
+- title: "Deep Learning Applications in Physics"
+  authors: "Author Name, Another Author"
+  journal: "Nature Machine Intelligence"
+  year: "2020"
+  doi: "10.1038/s42256-020-0001"
+
+- title: "Data Analysis Techniques in Modern Research"
+  authors: "Author Name, et al."
+  conference: "International Conference on Machine Learning (ICML)"
+  year: "2019"

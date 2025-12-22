@@ -1,0 +1,13 @@
+- position: "Assistant Professor"
+  institution: "University of Example"
+  location: "City, Country"
+  start_date: "2020"
+  end_date: "Present"
+  description: "Teaching and research in Computer Science"
+
+- position: "Postdoctoral Researcher"
+  institution: "Research Institute"
+  location: "City, Country"
+  start_date: "2018"
+  end_date: "2020"
+  description: "Research in Machine Learning and Data Science"

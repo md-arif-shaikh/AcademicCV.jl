@@ -1,0 +1,39 @@
+name: Build CV
+
+on:
+  push:
+    branches:
+      - main
+      - master
+  workflow_dispatch:
+
+jobs:
+  build-cv:
+    name: Build Academic CV
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Julia
+        uses: julia-actions/setup-julia@v2
+        with:
+          version: '1.12'
+      
+      - name: Install LaTeX
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-latex-extra
+      
+      - name: Install AcademicCV.jl
+        run: |
+          julia --project=. -e 'using Pkg; Pkg.instantiate()'
+      
+      - name: Build CV
+        run: |
+          julia --project=. examples/build_cv.jl
+      
+      - name: Upload CV PDF
+        uses: actions/upload-artifact@v4
+        with:
+          name: cv-pdf
+          path: examples/output/*.pdf

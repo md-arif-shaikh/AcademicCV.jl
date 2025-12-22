@@ -1,0 +1,11 @@
+- institution: "Institute for Advanced Study"
+  location: "Princeton, USA"
+  duration: "3 months"
+  year: "2019"
+  purpose: "Collaborative research on quantum computing"
+
+- institution: "CERN"
+  location: "Geneva, Switzerland"
+  duration: "2 months"
+  year: "2018"
+  purpose: "Research visit for particle physics data analysis"

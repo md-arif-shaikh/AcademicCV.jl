@@ -1,0 +1,52 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{enumitem}
+
+\geometry{margin=1in}
+
+\title{Curriculum Vitae}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Education}
+{{#education}}
+\subsection*{ {{degree}} }
+\textit{ {{institution}}, {{location}} } \hfill {{year}} \\
+{{#thesis}}
+\textbf{Thesis:} {{thesis}}
+{{/thesis}}
+
+{{/education}}
+
+\section*{Positions}
+{{#positions}}
+\subsection*{ {{position}} }
+\textit{ {{institution}}, {{location}} } \hfill {{start_date}} -- {{end_date}} \\
+{{description}}
+
+{{/positions}}
+
+\section*{Publications}
+\begin{enumerate}[leftmargin=*]
+{{#publications}}
+\item {{authors}}. ``{{title}}.'' {{#journal}}\textit{ {{journal}} }{{/journal}}{{#conference}}\textit{ {{conference}} }{{/conference}}, {{year}}.{{#doi}} DOI: \href{https://doi.org/{{doi}}}{ {{doi}} }{{/doi}}
+
+{{/publications}}
+\end{enumerate}
+
+\section*{Research Visits}
+{{#visits}}
+\subsection*{ {{institution}}, {{location}} }
+{{duration}}, {{year}} \\
+\textit{Purpose:} {{purpose}}
+
+{{/visits}}
+
+\end{document}
