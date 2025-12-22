@@ -1,66 +1,145 @@
 \documentclass[11pt,a4paper]{article}
+
+% Modern packages for better typography and layout
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{geometry}
+\usepackage{palatino} % Palatino font for better readability
+\usepackage[margin=0.75in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
 \usepackage{hyperref}
 
-\geometry{margin=1in}
+% Define colors for a modern look
+\definecolor{headercolor}{RGB}{0, 51, 102}
+\definecolor{linkcolor}{RGB}{0, 102, 204}
 
-\title{Curriculum Vitae}
-\author{}
-\date{}
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    urlcolor=linkcolor,
+    citecolor=linkcolor
+}
+
+% Customize section formatting
+% --- CUSTOM DEFINITIONS ---
+
+% 1. The Section Header
+% \rule{width}{thickness} -> We use \linewidth and 2pt thickness
+\newcommand{\CVSection}[1]{%
+    \par\vspace{1.5em} % Spacing before new section
+    \noindent
+    % \raisebox{lift_amount}{\rule{width}{thickness}}
+    % We lift it 0.25ex so it looks centered next to the font
+    \raisebox{0.25ex}{\rule{2cm}{3pt}}%
+    \hspace{0.5em}% Space between rule and text
+    {\Large\bfseries {#1}}\par
+    \vspace{0.3em} % Spacing after title
+}
+
+% 2. The Indented Environment
+% This acts like a tab stop for the whole block of text
+\newenvironment{CVContent}{%
+    \begin{list}{}{%
+        \setlength{\leftmargin}{1cm} % <--- CONTROL INDENTATION HERE
+        \setlength{\parsep}{0pt}
+        \setlength{\topsep}{0pt}
+        \setlength{\partopsep}{0pt}
+    }
+    \item[] % Empty item to start the text
+}{%
+    \end{list}
+}
+
+% --- END DEFINITIONS ---
+
+\titleformat{\subsection}
+  {\large\bfseries}
+  {}
+  {0em}
+  {}
+
+% Reduce spacing
+\titlespacing*{\section}{0pt}{12pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
+\titlespacing*{\subsection}{0pt}{8pt plus 3pt minus 2pt}{4pt plus 1pt minus 1pt}
+
+% Configure enumerate
+\setlist[enumerate]{leftmargin=*, itemsep=6pt, parsep=0pt}
+
+% Remove page numbers for a cleaner look
+\pagestyle{empty}
 
 \begin{document}
 
-\maketitle
+% Modern CV Header
+{\centering
+{\Huge\bfseries\color{headercolor} Curriculum Vitae}\\[0.5em]
+\vspace{1em}
+}
 
-\section*{Education}
-\subsection*{ Master of Science (MSc) }
-\textit{ University of Science, 321 Science Way, City, Country } \hfill September 2012 -- June 2014 \\
-\textbf{Department:} Department of Computer Science, \href{ https:&#x2F;&#x2F;cs.science.edu }{ https:&#x2F;&#x2F;cs.science.edu } \\
-\textbf{Advisor:} Jane Smith (\href{mailto:jsmith@science.edu}{ jsmith@science.edu }) \\
+\CVSection{Positions}
+\begin{CVContent}
+{\bfseries Assistant Professor} \hfill {September 2020 -- Present}\\
+{\itshape \href{https://www.example.edu}{University of Example}, 123 University Ave, City, State, 12345, Country}% <-- NO trailing \\ here
+\\ \href{https://cs.example.edu}{Department of Computer Science}% <-- \\ moved to start
 
-\subsection*{ Bachelor of Science (BSc) }
-\textit{ University of Engineering, 555 Engineering Rd, City, Country } \hfill September 2009 -- June 2012 \\
-\textbf{Department:} Department of Computer Engineering, \href{ https:&#x2F;&#x2F;coe.engineering.edu }{ https:&#x2F;&#x2F;coe.engineering.edu } \\
+\vspace{0.5em}
+\end{CVContent}
+\begin{CVContent}
+{\bfseries Postdoctoral Researcher} \hfill {July 2018 -- August 2020}\\
+{\itshape \href{https://www.research-institute.org}{Research Institute}, 456 Research Blvd, City, Country}% <-- NO trailing \\ here
+\\ \href{https://research.example.org}{Research Department}% <-- \\ moved to start
 
+\vspace{0.5em}
+\end{CVContent}
 
-\subsection*{ Doctor of Philosophy (PhD) }
-\textit{ University of Technology, 789 Tech Drive, City, State, 67890, Country } \hfill August 2014 -- May 2018 \\
-\textbf{Department:} Department of Computer Science, \href{ https:&#x2F;&#x2F;cs.tech.edu }{ https:&#x2F;&#x2F;cs.tech.edu } \\
-\textbf{Advisor:} John Doe (\href{mailto:johndoe@tech.edu}{ johndoe@tech.edu }) \\
+\CVSection{Education}
+\begin{CVContent}
+{\bfseries Doctor of Philosophy (PhD)} \hfill August 2014 -- May 2018\\
+{\itshape \href{https://www.tech.edu}{University of Technology}, 789 Tech Drive, City, State, 67890, Country}
+\\ \href{https://cs.tech.edu}{Department of Computer Science}
+\\ {\itshape Advisor:} John Doe (\href{mailto:johndoe@tech.edu}{johndoe@tech.edu})%
 
+\vspace{0.5em}
+\end{CVContent}
+\begin{CVContent}
+{\bfseries Master of Science (MSc)} \hfill September 2012 -- June 2014\\
+{\itshape \href{https://www.science.edu}{University of Science}, 321 Science Way, City, Country}
+\\ \href{https://cs.science.edu}{Department of Computer Science}
+\\ {\itshape Advisor:} Jane Smith (\href{mailto:jsmith@science.edu}{jsmith@science.edu})%
 
-\section*{Positions}
-\subsection*{ Postdoctoral Researcher }
-\textit{ Research Institute, 456 Research Blvd, City, Country } \hfill July 2018 -- August 2020 \\
-\textbf{Department:} Research Department, \href{ https:&#x2F;&#x2F;research.example.org }{ https:&#x2F;&#x2F;research.example.org } \\
+\vspace{0.5em}
+\end{CVContent}
+\begin{CVContent}
+{\bfseries Bachelor of Science (BSc)} \hfill September 2009 -- June 2012\\
+{\itshape \href{https://www.engineering.edu}{University of Engineering}, 555 Engineering Rd, City, Country}
+\\ \href{https://coe.engineering.edu}{Department of Computer Engineering}
 
-\subsection*{ Assistant Professor }
-\textit{ University of Example, 123 University Ave, City, State, 12345, Country } \hfill September 2020 -- Present \\
-\textbf{Department:} Department of Computer Science, \href{ https:&#x2F;&#x2F;cs.example.edu }{ https:&#x2F;&#x2F;cs.example.edu } \\
+\vspace{0.5em}
+\end{CVContent}
 
-
-\section*{Publications}
+\CVSection{Publications}
 \begin{enumerate}
-\item Author Name, Co-Author Name. ``Machine Learning for Scientific Discovery.'' \textit{ Journal of Machine Learning Research }, 2021. DOI: \href{https://doi.org/10.1234&#x2F;jmlr.2021.001}{ 10.1234&#x2F;jmlr.2021.001 }
-
-\item Author Name, Another Author. ``Deep Learning Applications in Physics.'' \textit{ Nature Machine Intelligence }, 2020. DOI: \href{https://doi.org/10.1038&#x2F;s42256-020-0001}{ 10.1038&#x2F;s42256-020-0001 }
-
-\item Author Name, et al.. ``Data Analysis Techniques in Modern Research.'' \textit{ International Conference on Machine Learning (ICML) }, 2019.
-
+\item Author Name, Co-Author Name. ``Machine Learning for Scientific Discovery.'' \textit{Journal of Machine Learning Research}, 2021. DOI: \href{https://doi.org/10.1234&#x2F;jmlr.2021.001}{10.1234&#x2F;jmlr.2021.001}
+\item Author Name, Another Author. ``Deep Learning Applications in Physics.'' \textit{Nature Machine Intelligence}, 2020. DOI: \href{https://doi.org/10.1038&#x2F;s42256-020-0001}{10.1038&#x2F;s42256-020-0001}
+\item Author Name, et al.. ``Data Analysis Techniques in Modern Research.'' \textit{International Conference on Machine Learning (ICML)}, 2019.
 \end{enumerate}
 
-\section*{Research Visits}
-\subsection*{ CERN, Geneva, Switzerland }
-July 1, 2018 -- August 31, 2018 \\
-\textbf{Department:} Physics Department \\
-\textbf{Host:} Dr. Marie Curie \\
-
-\subsection*{ Institute for Advanced Study, Princeton, USA }
-June 15, 2019 -- September 15, 2019 \\
-\textbf{Department:} School of Natural Sciences \\
-\textbf{Host:} Dr. Albert Einstein \\
-
+\CVSection{Research Visits}
+\begin{enumerate}
+\item
+Dr. Albert Einstein, %
+Institute for Advanced Study
+, School of Natural Sciences, %
+Princeton, USA, %
+June 15, 2019 -- September 15, 2019
+\item
+Dr. Marie Curie, %
+CERN
+, Physics Department, %
+Geneva, Switzerland, %
+July 1, 2018 -- August 31, 2018
+\end{enumerate}
 
 \end{document}

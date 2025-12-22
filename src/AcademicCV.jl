@@ -2,6 +2,7 @@ module AcademicCV
 
 using YAML
 using Mustache
+using OrderedCollections
 
 export build_cv, load_data, generate_latex, compile_pdf
 
@@ -24,13 +25,13 @@ function load_data(data_dir::String)
     for file in yaml_files
         filepath = joinpath(data_dir, file)
         key = replace(file, r"\.(yml|yaml)$" => "")
-        yaml_content = YAML.load_file(filepath)
+        yaml_content = YAML.load_file(filepath; dicttype=OrderedDict)
         
         # If the YAML content is a dictionary (not a list), convert dict values to a list
         # This makes it easier to iterate in Mustache templates
-        if isa(yaml_content, Dict) && !isempty(yaml_content)
+        if isa(yaml_content, AbstractDict) && !isempty(yaml_content)
             # Check if all values are dictionaries (typical for CV sections)
-            if all(v -> isa(v, Dict), values(yaml_content))
+            if all(v -> isa(v, AbstractDict), values(yaml_content))
                 data[key] = [v for (k, v) in yaml_content]
             else
                 data[key] = yaml_content

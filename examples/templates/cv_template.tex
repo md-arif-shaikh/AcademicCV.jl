@@ -1,9 +1,10 @@
 \documentclass[11pt,a4paper]{article}
+{{=<% %>=}}
 
 % Modern packages for better typography and layout
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{lmodern} % Latin Modern font for better readability
+\usepackage{palatino} % Palatino font for better readability
 \usepackage[margin=0.75in]{geometry}
 \usepackage{titlesec}
 \usepackage{enumitem}
@@ -23,12 +24,36 @@
 }
 
 % Customize section formatting
-\titleformat{\section}
-  {\Large\bfseries\color{headercolor}}
-  {}
-  {0em}
-  {}
-  [\titlerule]
+% --- CUSTOM DEFINITIONS ---
+
+% 1. The Section Header
+% \rule{width}{thickness} -> We use \linewidth and 2pt thickness
+\newcommand{\CVSection}[1]{%
+    \par\vspace{1.5em} % Spacing before new section
+    \noindent
+    % \raisebox{lift_amount}{\rule{width}{thickness}}
+    % We lift it 0.25ex so it looks centered next to the font
+    \raisebox{0.25ex}{\rule{2cm}{3pt}}%
+    \hspace{0.5em}% Space between rule and text
+    {\Large\bfseries {#1}}\par
+    \vspace{0.3em} % Spacing after title
+}
+
+% 2. The Indented Environment
+% This acts like a tab stop for the whole block of text
+\newenvironment{CVContent}{%
+    \begin{list}{}{%
+        \setlength{\leftmargin}{1cm} % <--- CONTROL INDENTATION HERE
+        \setlength{\parsep}{0pt}
+        \setlength{\topsep}{0pt}
+        \setlength{\partopsep}{0pt}
+    }
+    \item[] % Empty item to start the text
+}{%
+    \end{list}
+}
+
+% --- END DEFINITIONS ---
 
 \titleformat{\subsection}
   {\large\bfseries}
@@ -54,50 +79,55 @@
 \vspace{1em}
 }
 
-\section*{Education}
-{{#education}}
-\subsection*{{{degree}}}
-\textit{{{institute}}, {{institute-address}}} \hfill \textbf{{{from-month}} {{from-year}} -- {{#to-year}}{{to-month}} {{to-year}}{{/to-year}}{{^to-year}}Present{{/to-year}}}
-{{#department}}
-
-\textbf{Department:} {{department}}{{#department-website}}, \href{{{department-website}}}{{{department-website}}}{{/department-website}}{{/department}}
-{{#advisor}}
-
-\textbf{Advisor:} {{advisor}}{{#advisor-email}} (\href{mailto:{{advisor-email}}}{{{advisor-email}}}){{/advisor-email}}{{/advisor}}
-
-\vspace{0.5em}
-{{/education}}
-
-\section*{Positions}
-{{#positions}}
-\subsection*{{{position}}}
-\textit{{{institute}}, {{institute-address}}} \hfill \textbf{{{from-month}} {{from-year}} -- {{#to-year}}{{to-month}} {{to-year}}{{/to-year}}{{^to-year}}Present{{/to-year}}}
-{{#department}}
-
-\textbf{Department:} {{department}}{{#department-website}}, \href{{{department-website}}}{{{department-website}}}{{/department-website}}{{/department}}
+\CVSection{Positions}
+<%#positions%>
+\begin{CVContent}
+{\bfseries <%position%>} \hfill {<%from-month%> <%from-year%> -- <%#to-year%><%to-month%> <%to-year%><%/to-year%><%^to-year%>Present<%/to-year%>}\\
+{\itshape <%#institute-website%>\href{<%&institute-website%>}{<%institute%>}<%/institute-website%><%^institute-website%><%institute%><%/institute-website%>, <%institute-address%>}% <-- NO trailing \\ here
+<%#department%>
+\\ <%#department-website%>\href{<%&department-website%>}{<%department%>}<%/department-website%><%^department-website%><%department%><%/department-website%>% <-- \\ moved to start
+<%/department%>
+<%#advisor%>
+\\ {\itshape Advisor:} <%advisor%><%#advisor-email%> (\href{mailto:<%advisor-email%>}{<%advisor-email%>})<%/advisor-email%>% <-- \\ moved to start
+<%/advisor%>
 
 \vspace{0.5em}
-{{/positions}}
+\end{CVContent}
+<%/positions%>
 
-\section*{Publications}
+\CVSection{Education}
+<%#education%>
+\begin{CVContent}
+{\bfseries <%degree%>} \hfill <%from-month%> <%from-year%> -- <%#to-year%><%to-month%> <%to-year%><%/to-year%><%^to-year%>Present<%/to-year%>\\
+{\itshape <%#institute-website%>\href{<%&institute-website%>}{<%institute%>}<%/institute-website%><%^institute-website%><%institute%><%/institute-website%>, <%institute-address%>}
+<%#department%>
+\\ <%#department-website%>\href{<%&department-website%>}{<%department%>}<%/department-website%><%^department-website%><%department%><%/department-website%>
+<%/department%>
+<%#advisor%>
+\\ {\itshape Advisor:} <%advisor%><%#advisor-email%> (\href{mailto:<%advisor-email%>}{<%advisor-email%>})<%/advisor-email%>%
+<%/advisor%>
+
+\vspace{0.5em}
+\end{CVContent}
+<%/education%>
+
+\CVSection{Publications}
 \begin{enumerate}
-{{#publications}}
-\item {{authors}}. ``{{title}}.'' {{#journal}}\textit{{{journal}}}{{/journal}}{{#conference}}\textit{{{conference}}}{{/conference}}, {{year}}.{{#doi}} DOI: \href{https://doi.org/{{doi}}}{{{doi}}}{{/doi}}
-{{/publications}}
+<%#publications%>
+\item <%authors%>. ``<%title%>.'' <%#journal%>\textit{<%journal%>}<%/journal%><%#conference%>\textit{<%conference%>}<%/conference%>, <%year%>.<%#doi%> DOI: \href{https://doi.org/<%doi%>}{<%doi%>}<%/doi%>
+<%/publications%>
 \end{enumerate}
 
-\section*{Research Visits}
-{{#visits}}
-\subsection*{{{institute}}, {{city}}, {{country}}}
-\textbf{{{from-month}} {{from-date}}, {{from-year}} -- {{to-month}} {{to-date}}, {{to-year}}}
-{{#department}}
-
-\textbf{Department:} {{department}}{{/department}}
-{{#host}}
-
-\textbf{Host:} {{host}}{{/host}}
-
-\vspace{0.5em}
-{{/visits}}
+\CVSection{Research Visits}
+\begin{enumerate}
+<%#visits%>
+\item
+<%#host%><%host%>, <%/host%>%
+<%#institute-website%>\href{<%&institute-website%>}{<%institute%>}<%/institute-website%><%^institute-website%><%institute%><%/institute-website%>
+<%#department%>, <%department%><%/department%>, %
+<%city%>, <%country%>, %
+<%from-month%> <%from-date%>, <%from-year%> -- <%to-month%> <%to-date%>, <%to-year%>
+<%/visits%>
+\end{enumerate}
 
 \end{document}
