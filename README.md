@@ -220,18 +220,28 @@ View the example LaTeX output directly:
 - Copy and compile it locally with `pdflatex cv.tex` to see the PDF
 - Use an online LaTeX editor like [Overleaf](https://www.overleaf.com/) to compile and view
 
-#### 2. Pre-generated PDF (Available After Merge)
+#### 2. Test PDF Generation in PR (Available Now)
+To verify PDF generation works before merging:
+1. Go to the **[Actions tab](../../actions)** in this repository
+2. Click on the **"Build CV"** workflow for this PR
+3. Wait for the workflow to complete (installs Julia, LaTeX, and builds the PDF)
+4. Download the **`cv-pdf`** artifact from the workflow run
+5. Extract and view the PDF to verify it's correct
+
+The workflow now runs on pull requests so you can test PDF generation before merging.
+
+#### 3. Pre-generated PDF (Available After Merge)
 After this PR is merged to main, the GitHub Actions workflow will automatically compile the example and push the PDF to the `cv-output` branch:
 - **[View/Download the PDF](../../blob/cv-output/cv.pdf)** from the cv-output branch
 - The PDF will be automatically updated whenever changes are pushed to the main branch
 - **Note**: The `cv-output` branch will be created automatically on the first workflow run after merge
 
-#### 3. After Running Locally
+#### 4. After Running Locally
 After running the build script yourself, you can find:
 - **LaTeX source**: `examples/output/cv.tex`
 - **PDF output**: `examples/output/cv.pdf` (if LaTeX is installed)
 
-#### 4. GitHub Actions Artifacts
+#### 5. GitHub Actions Artifacts
 When using GitHub Actions in your own repository, the generated PDF is also available as a workflow artifact:
 1. Go to the Actions tab in your repository
 2. Click on the latest "Build CV" workflow run

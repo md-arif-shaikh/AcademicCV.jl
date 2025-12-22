@@ -5,6 +5,10 @@ on:
     branches:
       - main
       - master
+  pull_request:
+    branches:
+      - main
+      - master
   workflow_dispatch:
 
 permissions:
@@ -45,6 +49,7 @@ jobs:
           path: examples/output/*.pdf
       
       - name: Deploy PDF to cv-output branch
+        if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
         run: |
           # Configure git
           git config --global user.name "github-actions[bot]"
