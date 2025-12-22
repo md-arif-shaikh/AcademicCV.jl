@@ -169,15 +169,90 @@ jobs:
 ## Examples
 
 See the `examples/` directory for:
-- Sample YAML data files
-- Example LaTeX template
-- Build script
+- Sample YAML data files in `examples/_data/`
+- Example LaTeX template in `examples/templates/`
+- Build scripts
 
 To run the example:
 
 ```bash
 cd examples
 julia --project=.. build_cv.jl
+```
+
+This will:
+1. Load YAML files from `_data/` directory
+2. Use the template from `templates/cv_template.tex`
+3. Generate a TeX file in `output/`
+4. Compile to PDF (if pdflatex is available)
+
+## Package Structure
+
+```
+AcademicCV.jl/
+├── src/
+│   └── AcademicCV.jl          # Main module
+├── examples/
+│   ├── _data/                 # Example YAML data
+│   │   ├── positions.yml
+│   │   ├── education.yml
+│   │   ├── publications.yml
+│   │   └── visits.yml
+│   ├── templates/             # Example LaTeX templates
+│   │   └── cv_template.tex
+│   └── build_cv.jl           # Example build script
+├── test/
+│   └── runtests.jl           # Test suite
+├── .github/workflows/         # GitHub Actions
+│   ├── CI.yml                # Testing workflow
+│   └── build-cv.yml          # CV building workflow
+├── Project.toml              # Package metadata
+└── README.md
+```
+
+## Customizing Templates
+
+The package uses [Mustache templating](https://mustache.github.io/) for LaTeX generation. Here's how to create custom templates:
+
+### Template Syntax
+
+- `{{variable}}` - Insert a variable
+- `{{#section}}...{{/section}}` - Loop over arrays or conditionally show content
+- `{{^section}}...{{/section}}` - Inverted section (shows if section is false/empty)
+
+### Example Template Snippet
+
+```latex
+\section*{Publications}
+\begin{enumerate}
+{{#publications}}
+\item {{authors}}. ``{{title}}.'' 
+{{#journal}}\textit{ {{journal}} }, {{/journal}}{{year}}.
+{{#doi}}DOI: \href{https://doi.org/{{doi}}}{ {{doi}} }{{/doi}}
+{{/publications}}
+\end{enumerate}
+```
+
+This will iterate over all publications in your `publications.yml` file and format them according to the template.
+
+### Custom YAML Fields
+
+You can add any fields to your YAML files and reference them in the template. For example:
+
+```yaml
+# custom_data.yml
+- field1: "Value 1"
+  field2: "Value 2"
+  nested:
+    subfield: "Nested value"
+```
+
+Then in your template:
+```latex
+{{#custom_data}}
+{{field1}} - {{field2}}
+{{#nested}}Nested: {{subfield}}{{/nested}}
+{{/custom_data}}
 ```
 
 ## Requirements
