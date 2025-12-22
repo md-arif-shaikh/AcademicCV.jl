@@ -6,7 +6,7 @@
 A Julia package for building academic CVs from YAML data files and LaTeX templates.
 
 📄 **[View Example LaTeX Output](examples/output/cv.tex)** - See the generated LaTeX file  
-📥 **[Download Example PDF](../../tree/cv-output)** - View the compiled PDF from the cv-output branch
+📥 **Download Example PDF** - Will be available in the [cv-output branch](../../tree/cv-output) after merging to main
 
 ## Features
 
@@ -210,20 +210,21 @@ This will:
 ### Viewing the Output
 
 **LaTeX Source**: [examples/output/cv.tex](examples/output/cv.tex)  
-**Compiled PDF**: Available in the [cv-output branch](../../tree/cv-output)
+**Compiled PDF**: Will be available in the [cv-output branch](../../tree/cv-output) after this PR is merged
 
 The package provides multiple ways to view the output:
 
-#### 1. Pre-generated PDF (Recommended)
-The GitHub Actions workflow automatically compiles the example and pushes the PDF to the `cv-output` branch:
-- **[View/Download the PDF](../../blob/cv-output/cv.pdf)** from the cv-output branch
-- This PDF is automatically updated whenever changes are pushed to the main branch
-
-#### 2. LaTeX Source
+#### 1. LaTeX Source (Available Now)
 View the example LaTeX output directly:
 - **[examples/output/cv.tex](examples/output/cv.tex)** - Pre-generated example showing what the package produces from the sample YAML data
 - Copy and compile it locally with `pdflatex cv.tex` to see the PDF
 - Use an online LaTeX editor like [Overleaf](https://www.overleaf.com/) to compile and view
+
+#### 2. Pre-generated PDF (Available After Merge)
+After this PR is merged to main, the GitHub Actions workflow will automatically compile the example and push the PDF to the `cv-output` branch:
+- **[View/Download the PDF](../../blob/cv-output/cv.pdf)** from the cv-output branch
+- The PDF will be automatically updated whenever changes are pushed to the main branch
+- **Note**: The `cv-output` branch will be created automatically on the first workflow run after merge
 
 #### 3. After Running Locally
 After running the build script yourself, you can find:
