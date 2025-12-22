@@ -1,0 +1,13 @@
+name = "AcademicCV"
+uuid = "6342e7ff-5917-4989-ac23-9add7aa15b9f"
+version = "0.1.0"
+authors = ["md-arif-shaikh"]
+
+[deps]
+YAML = "ddb6d928-2868-570f-bddf-ab3f9cf99eb6"
+Mustache = "ffc61752-8dc7-55ee-8c37-f3e9cdd09e70"
+
+[compat]
+julia = "1.6"
+YAML = "0.4"
+Mustache = "1.0"
