@@ -14,7 +14,8 @@ A Julia package for building academic CVs from YAML data files and LaTeX templat
 - 📝 Generate LaTeX files using Mustache templates
 - 🔧 Compile LaTeX to PDF automatically
 - 🚀 Easy integration with GitHub Actions for automated CV generation
-- 🎨 Customizable templates for different CV styles
+- 🎨 Modern, professional template with clean typography and color accents
+- 🔄 Customizable templates for different CV styles
 
 ## Installation
 
