@@ -97,25 +97,33 @@ function compile_pdf(tex_file::String; engine::String="pdflatex", clean::Bool=tr
             try
                 run(`$engine -interaction=nonstopmode $tex_basename`)
             catch e
-                # If pdflatex fails, try to show the log file
-                log_file = replace(tex_basename, r"\.tex$" => ".log")
-                if isfile(log_file)
-                    println("\n" * "="^80)
-                    println("LaTeX compilation failed. Last 50 lines of log file:")
-                    println("="^80)
-                    log_content = readlines(log_file)
-                    for line in log_content[max(1, length(log_content)-49):end]
-                        println(line)
+                # pdflatex may return non-zero exit code even if PDF is created
+                # Check if PDF exists before treating as fatal error
+                pdf_basename = replace(tex_basename, r"\.tex$" => ".pdf")
+                if !isfile(pdf_basename)
+                    # PDF not created - this is a real error
+                    log_file = replace(tex_basename, r"\.tex$" => ".log")
+                    if isfile(log_file)
+                        println("\n" * "="^80)
+                        println("LaTeX compilation failed. Last 50 lines of log file:")
+                        println("="^80)
+                        log_content = readlines(log_file)
+                        for line in log_content[max(1, length(log_content)-49):end]
+                            println(line)
+                        end
+                        println("="^80)
                     end
-                    println("="^80)
+                    rethrow(e)
+                else
+                    # PDF exists - just warnings, continue
+                    println("Warning: LaTeX returned non-zero exit code, but PDF was created successfully.")
                 end
-                rethrow(e)
             end
         end
         
         pdf_file = replace(tex_file, r"\.tex$" => ".pdf")
         
-        # Check if PDF was actually created
+        # Final check if PDF was actually created
         pdf_basename = replace(tex_basename, r"\.tex$" => ".pdf")
         if !isfile(pdf_basename)
             error("PDF file was not created. LaTeX compilation may have failed silently.")
