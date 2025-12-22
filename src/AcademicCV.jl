@@ -44,6 +44,12 @@ function generate_latex(data::Dict, template_file::String, output_file::String)
     
     output_content = Mustache.render(template, data)
     
+    # Ensure output directory exists
+    output_dir = dirname(output_file)
+    if !isempty(output_dir) && !isdir(output_dir)
+        mkpath(output_dir)
+    end
+    
     write(output_file, output_content)
     println("LaTeX file generated: $output_file")
     
