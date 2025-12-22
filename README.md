@@ -5,7 +5,8 @@
 
 A Julia package for building academic CVs from YAML data files and LaTeX templates.
 
-📄 **[View Example Output](examples/output/cv.tex)** - See the generated LaTeX file
+📄 **[View Example LaTeX Output](examples/output/cv.tex)** - See the generated LaTeX file  
+📥 **[Download Example PDF](../../tree/cv-output)** - View the compiled PDF from the cv-output branch
 
 ## Features
 
@@ -208,23 +209,32 @@ This will:
 
 ### Viewing the Output
 
-**See the example output here: [examples/output/cv.tex](examples/output/cv.tex)**
+**LaTeX Source**: [examples/output/cv.tex](examples/output/cv.tex)  
+**Compiled PDF**: Available in the [cv-output branch](../../tree/cv-output)
 
-This is a pre-generated example showing what the package produces from the sample YAML data. You can:
-- View the LaTeX source directly in the repository
+The package provides multiple ways to view the output:
+
+#### 1. Pre-generated PDF (Recommended)
+The GitHub Actions workflow automatically compiles the example and pushes the PDF to the `cv-output` branch:
+- **[View/Download the PDF](../../blob/cv-output/cv.pdf)** from the cv-output branch
+- This PDF is automatically updated whenever changes are pushed to the main branch
+
+#### 2. LaTeX Source
+View the example LaTeX output directly:
+- **[examples/output/cv.tex](examples/output/cv.tex)** - Pre-generated example showing what the package produces from the sample YAML data
 - Copy and compile it locally with `pdflatex cv.tex` to see the PDF
 - Use an online LaTeX editor like [Overleaf](https://www.overleaf.com/) to compile and view
 
+#### 3. After Running Locally
 After running the build script yourself, you can find:
 - **LaTeX source**: `examples/output/cv.tex`
 - **PDF output**: `examples/output/cv.pdf` (if LaTeX is installed)
 
-When using GitHub Actions, the generated PDF is available as a workflow artifact. You can:
+#### 4. GitHub Actions Artifacts
+When using GitHub Actions in your own repository, the generated PDF is also available as a workflow artifact:
 1. Go to the Actions tab in your repository
 2. Click on the latest "Build CV" workflow run
 3. Download the `cv-pdf` artifact
-
-Alternatively, you can set up GitHub Pages to automatically publish your CV online.
 
 ## Package Structure
 
