@@ -1,23 +1,41 @@
-assistant_professor:
+assistant_professor_vsm:
   position: Assistant Professor
-  department: Department of Computer Science
-  department-website: https://cs.example.edu
-  institute: University of Example
-  institute-website: https://www.example.edu
-  institute-address: "123 University Ave, City, State, 12345, Country"
-  from-year: 2020
-  from-month: September
+  department: Department of Physics
+  department-website: 
+  institute: Vivekananda Satavarshiki Mahavidyalaya
+  institute-website: https://www.vsm.org.in/
+  institute-address: Manikpara, West Bengal, 721513, India
+  from-year: 2023
+  from-month: November
   to-year:
   to-month:
-
-postdoc_researcher:
-  position: Postdoctoral Researcher
-  department: Research Department
-  department-website: https://research.example.org
-  institute: Research Institute
-  institute-website: https://www.research-institute.org
-  institute-address: "456 Research Blvd, City, Country"
-  from-year: 2018
+postdoc_snu:
+  position: Postdoctoral Fellow
+  department: Department of Physics and Astronomy
+  department-website: https://physics.snu.ac.kr/en
+  institute: Seoul National University
+  institute-website: https://en.snu.ac.kr
+  institute-address: 1 Gwanak-ro, Gwanak-gu, Seoul 08826, Korea
+  from-year: 2022
   from-month: July
-  to-year: 2020
-  to-month: August
+  to-year: 2023
+  to-month: November
+  advisors:
+    hyungMok:
+      name: Hyung Mok Lee
+      website: http://astro.snu.ac.kr/~hmlee/
+postdoc_icts:
+    position: Postdoctoral Fellow
+    department: Astrophysical Relativity
+    department-website: https://www.icts.res.in/research/astrorel
+    institute: International Centre for Theoretical Sciences
+    institute-website: https://www.icts.res.in
+    institute-address: Hesaraghatta Hobli, Karnataka, 560089, India
+    from-year: 2019
+    from-month: July
+    to-year: 2022
+    to-month: June
+    advisors:
+      Ajith:
+        name: Parameswaran Ajith
+        website: https://home.icts.res.in/~ajith/Home.html

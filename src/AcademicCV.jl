@@ -4,6 +4,12 @@ using YAML
 using Mustache
 using OrderedCollections
 
+# load helper modules
+include("Formatting.jl")
+include("BibTools.jl")
+using .Formatting: escape_latex, strip_tex, abbreviate_name, build_author_abbr, html_unescape, sanitize
+using .BibTools: parse_bib_file
+
 export build_cv, load_data, generate_latex, compile_pdf
 
 """
@@ -22,23 +28,198 @@ function load_data(data_dir::String)
     data = Dict{String, Any}()
     yaml_files = filter(f -> endswith(f, ".yml") || endswith(f, ".yaml"), readdir(data_dir))
     
+    # Helper: recursively convert any dict-of-dicts into arrays of values
+    function normalize(obj)
+        if isa(obj, AbstractDict)
+            # If all values are dict-like, convert to array of normalized values
+            if !isempty(obj) && all(v -> isa(v, AbstractDict), values(obj))
+                return [normalize(v) for v in values(obj)]
+            else
+                # normalize each value in-place
+                out = OrderedDict()
+                for (k, v) in obj
+                    out[k] = normalize(v)
+                end
+                return out
+            end
+        elseif isa(obj, AbstractVector)
+            return [normalize(v) for v in obj]
+        else
+            return obj
+        end
+    end
+
+    # Helper to remove simple LaTeX commands and braces from strings
+    function strip_tex(s)
+        if !isa(s, String)
+            return s
+        end
+        out = s
+        # Convert common LaTeX accent commands to Unicode combining marks
+        function latex_accents_to_utf8(str)
+            # Map common LaTeX accent commands to precomposed Unicode characters
+            acc_map = Dict{
+                Char, Dict{Char,String}
+            }()
+
+            # Diaeresis (\")
+            acc_map['"'] = Dict('a'=>"ä", 'e'=>"ë", 'i'=>"ï", 'o'=>"ö", 'u'=>"ü", 'y'=>"ÿ",
+                                 'A'=>"Ä", 'E'=>"Ë", 'I'=>"Ï", 'O'=>"Ö", 'U'=>"Ü", 'Y'=>"Ÿ")
+            # Acute (\')
+            acc_map['\''] = Dict('a'=>"á", 'e'=>"é", 'i'=>"í", 'o'=>"ó", 'u'=>"ú", 'y'=>"ý",
+                                  'A'=>"Á", 'E'=>"É", 'I'=>"Í", 'O'=>"Ó", 'U'=>"Ú", 'Y'=>"Ý")
+            # Grave (`)
+            acc_map['`'] = Dict('a'=>"à", 'e'=>"è", 'i'=>"ì", 'o'=>"ò", 'u'=>"ù",
+                                'A'=>"À", 'E'=>"È", 'I'=>"Ì", 'O'=>"Ò", 'U'=>"Ù")
+            # Circumflex (^)
+            acc_map['^'] = Dict('a'=>"â", 'e'=>"ê", 'i'=>"î", 'o'=>"ô", 'u'=>"û",
+                                'A'=>"Â", 'E'=>"Ê", 'I'=>"Î", 'O'=>"Ô", 'U'=>"Û")
+            # Tilde (~)
+            acc_map['~'] = Dict('n'=>"ñ", 'a'=>"ã", 'o'=>"õ",
+                                'N'=>"Ñ", 'A'=>"Ã", 'O'=>"Õ")
+            # Cedilla (c)
+            acc_map['c'] = Dict('c'=>"ç", 'C'=>"Ç")
+            # Caron (v)
+            acc_map['v'] = Dict('c'=>"č", 's'=>"š", 'z'=>"ž",
+                                'C'=>"Č", 'S'=>"Š", 'Z'=>"Ž")
+            # Double acute (H)
+            acc_map['H'] = Dict('o'=>"ő", 'u'=>"ű", 'O'=>"Ő", 'U'=>"Ű")
+            # Ring (r)
+            acc_map['r'] = Dict('a'=>"å", 'A'=>"Å")
+            # Dot above (.)
+            acc_map['.'] = Dict('e'=>"ė", 'E'=>"Ė")
+            # Macron (=)
+            acc_map['='] = Dict('a'=>"ā", 'e'=>"ē", 'i'=>"ī", 'o'=>"ō", 'u'=>"ū",
+                                'A'=>"Ā", 'E'=>"Ē", 'I'=>"Ī", 'O'=>"Ō", 'U'=>"Ū")
+
+            out2 = str
+            # Replace patterns like \"{u} and \"u with precomposed characters when available
+            for (cmd, cmap) in acc_map
+                for (L, rep) in cmap
+                    pat1 = "\\" * string(cmd) * "{" * string(L) * "}"
+                    pat2 = "\\" * string(cmd) * string(L)
+                    out2 = replace(out2, pat1 => rep)
+                    out2 = replace(out2, pat2 => rep)
+                end
+            end
+
+            # For any remaining simple accent commands that we don't recognize, strip the command and keep the letter
+            out2 = replace(out2, r"\\.\{([A-Za-z])\}" => m-> m.captures[1])
+            out2 = replace(out2, r"\\([A-Za-z])" => m-> m.captures[1])
+
+            return out2
+        end
+
+        out = latex_accents_to_utf8(out)
+        # Replace only safe text-like macros (e.g., \textit{...}, \emph{...}) by their contents
+        out = replace(out, r"\\(?:textit|textbf|emph|itshape)\{([^}]*)\}" => s-> s.captures[1])
+        # Remove remaining braces and leftover backslashes
+        out = replace(out, r"[{}]" => "")
+        out = replace(out, "\\" => "")
+        return out
+    end
+
+    # YAML loading and sanitization handled in Formatting.jl
+
+    # Load YAML files and normalize/sanitize
     for file in yaml_files
         filepath = joinpath(data_dir, file)
         key = replace(file, r"\.(yml|yaml)$" => "")
         yaml_content = YAML.load_file(filepath; dicttype=OrderedDict)
-        
-        # If the YAML content is a dictionary (not a list), convert dict values to a list
-        # This makes it easier to iterate in Mustache templates
+        yaml_content = normalize(yaml_content)
+        yaml_content = sanitize(yaml_content)
+
         if isa(yaml_content, AbstractDict) && !isempty(yaml_content)
-            # Check if all values are dictionaries (typical for CV sections)
             if all(v -> isa(v, AbstractDict), values(yaml_content))
                 data[key] = [v for (k, v) in yaml_content]
+                data[string(key, "_count")] = length(data[key])
             else
                 data[key] = yaml_content
             end
         else
             data[key] = yaml_content
         end
+
+        if isa(data[key], AbstractVector)
+            data[string(key, "_count")] = length(data[key])
+        end
+    end
+
+    # Parse any .bib files in the data directory into separate publication collections
+    bib_files = filter(f -> endswith(f, ".bib"), readdir(data_dir))
+
+    if !isempty(bib_files)
+        # optional highlights mapping: read from `authinfo` (key `bib-highlights` or `bib_highlights`)
+        bib_highlights = Dict{String,String}()
+        if haskey(data, "authinfo") && isa(data["authinfo"], AbstractDict)
+            auth = data["authinfo"]
+            raw = nothing
+            if haskey(auth, "bib-highlights")
+                raw = auth["bib-highlights"]
+            elseif haskey(auth, "bib_highlights")
+                raw = auth["bib_highlights"]
+            end
+            if isa(raw, AbstractDict)
+                for (k,v) in raw
+                    bib_highlights[string(k)] = string(v)
+                end
+            end
+        end
+
+        # helper functions for name formatting live in Formatting.jl
+
+        bib_collections = Any[]
+        for bib in bib_files
+            path = joinpath(data_dir, bib)
+            entries = parse_bib_file(path)
+            name = replace(bib, r"\.bib$" => "")
+            # compute abbreviated author field before sanitization
+            hl = get(bib_highlights, name, nothing)
+            for e in entries
+                # compute abbreviated author string and normalize fields using helpers
+                if haskey(e, "author")
+                    e["author"] = strip_tex(string(e["author"]))
+                end
+                if haskey(e, "doi")
+                    e["doi"] = strip_tex(string(e["doi"]))
+                end
+                if haskey(e, "eprint")
+                    e["eprint"] = strip_tex(string(e["eprint"]))
+                end
+                e["author_abbr"] = build_author_abbr(get(e, "author", ""); highlight=hl)
+            end
+            # sanitize each entry similar to YAML data (this will not touch author_abbr)
+            entries = sanitize(entries)
+            # friendly label mapping
+            label_map = Dict("short_author" => "Short author publications",
+                             "sxs" => "SXS Collaboration",
+                             "lvk" => "LVK Collaboration")
+            push!(bib_collections, OrderedDict("id" => name,
+                                              "label" => get(label_map, name, name),
+                                              "entries" => entries,
+                                              "entries_count" => length(entries)))
+            data[string("bib_", name, "_count")] = length(entries)
+        end
+
+        # reorder collections to desired order if present
+        preferred = ["short_author", "sxs", "lvk"]
+        ordered = Any[]
+        for p in preferred
+            for c in bib_collections
+                if c["id"] == p
+                    push!(ordered, c)
+                end
+            end
+        end
+        # append any remaining collections not listed above
+        for c in bib_collections
+            if !any(x->x["id"]==c["id"], ordered)
+                push!(ordered, c)
+            end
+        end
+
+        data["bib_collections"] = ordered
+        data["bib_collections_count"] = length(ordered)
     end
     
     return data

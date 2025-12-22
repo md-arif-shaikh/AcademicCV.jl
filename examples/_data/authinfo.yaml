@@ -1,0 +1,19 @@
+name: Md Arif Shaikh
+email: arifshaikh.astro@gmail.com
+website: https://mdarifshaikh.com
+position: Assistant Professor
+department: Department of Physics
+department-website:
+institute: Vivekananda Satavarshiki Mahavidyalaya
+institute-website: https://www.vsm.org.in/
+institute-address: Manikpara, West Bengal, 721513, India  
+phone: +91 8601923985
+introduction: |
+  Gravitational wave astrophysicist working on various aspects of
+  gravitational wave physics, including waveform modeling, data analysis,
+  and tests of general relativity using gravitational wave observations.
+
+bib-highlights:
+  short_author: "Shaikh, Md Arif"
+  sxs: "Shaikh, Md Arif"
+  lvk: "Shaikh, Md Arif"

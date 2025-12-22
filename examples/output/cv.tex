@@ -70,76 +70,185 @@
 % Remove page numbers for a cleaner look
 \pagestyle{empty}
 
+% Global counter for reverse-numbering bibliographies
+\newcounter{bibcount}
+
 \begin{document}
 
-% Modern CV Header
+% Modern CV Header (rendered from authinfo.yaml)
 {\centering
-{\Huge\bfseries\color{headercolor} Curriculum Vitae}\\[0.5em]
-\vspace{1em}
+{\Huge\bfseries\color{headercolor} Md Arif Shaikh}\\[0.25em]
+{\large\color{headercolor} Assistant Professor}\\
+ \vspace{0.5em}
+{\small
+Gravitational wave astrophysicist working on various aspects of
+gravitational wave physics, including waveform modeling, data analysis,
+and tests of general relativity using gravitational wave observations.
+
+\vspace{0.5em}
+\href{\detokenize{mailto:arifshaikh.astro@gmail.com}}{arifshaikh.astro@gmail.com}
+ \quad | \quad \href{\detokenize{https://mdarifshaikh.com}}{https://mdarifshaikh.com}
+ \quad | \quad +91 8601923985
+}
+\vspace{0.6em}
+\noindent\rule{\linewidth}{0.8pt}
+\par
 }
 
 \CVSection{Positions}
 \begin{CVContent}
-{\bfseries Assistant Professor} \hfill {September 2020 -- Present}\\
-{\itshape \href{https://www.example.edu}{University of Example}, 123 University Ave, City, State, 12345, Country}% <-- NO trailing \\ here
-\\ \href{https://cs.example.edu}{Department of Computer Science}% <-- \\ moved to start
+{\bfseries Assistant Professor} \hfill {November 2023 -- Present}\\
+{\itshape Department of Physics, \href{\detokenize{https://www.vsm.org.in/}}{Vivekananda Satavarshiki Mahavidyalaya}}\\
+Manikpara, West Bengal, 721513, India
 
 \vspace{0.5em}
 \end{CVContent}
 \begin{CVContent}
-{\bfseries Postdoctoral Researcher} \hfill {July 2018 -- August 2020}\\
-{\itshape \href{https://www.research-institute.org}{Research Institute}, 456 Research Blvd, City, Country}% <-- NO trailing \\ here
-\\ \href{https://research.example.org}{Research Department}% <-- \\ moved to start
+{\bfseries Postdoctoral Fellow} \hfill {July 2022 -- November 2023}\\
+{\itshape \href{\detokenize{https://physics.snu.ac.kr/en}}{Department of Physics and Astronomy}, \href{\detokenize{https://en.snu.ac.kr}}{Seoul National University}}\\
+1 Gwanak-ro, Gwanak-gu, Seoul 08826, Korea
+\\ {\itshape Advisor: }\href{\detokenize{http://astro.snu.ac.kr/~hmlee/}}{Hyung Mok Lee}
+
+\vspace{0.5em}
+\end{CVContent}
+\begin{CVContent}
+{\bfseries Postdoctoral Fellow} \hfill {July 2019 -- June 2022}\\
+{\itshape \href{\detokenize{https://www.icts.res.in/research/astrorel}}{Astrophysical Relativity}, \href{\detokenize{https://www.icts.res.in}}{International Centre for Theoretical Sciences}}\\
+Hesaraghatta Hobli, Karnataka, 560089, India
+\\ {\itshape Advisor: }\href{\detokenize{https://home.icts.res.in/~ajith/Home.html}}{Parameswaran Ajith}
 
 \vspace{0.5em}
 \end{CVContent}
 
 \CVSection{Education}
 \begin{CVContent}
-{\bfseries Doctor of Philosophy (PhD)} \hfill August 2014 -- May 2018\\
-{\itshape \href{https://www.tech.edu}{University of Technology}, 789 Tech Drive, City, State, 67890, Country}
-\\ \href{https://cs.tech.edu}{Department of Computer Science}
-\\ {\itshape Advisor:} John Doe (\href{mailto:johndoe@tech.edu}{johndoe@tech.edu})%
+{\bfseries Doctor of Philosophy (PhD)} \hfill July 2014 -- June 2019\\
+{\itshape \href{\detokenize{https://www.hri.res.in}}{Harish-Chandra Research Institute}}\\
+Chhatnag Road, Jhunsi, Prayagraj, 211019, Uttar Pradesh, India
+\\ Cosmology \& High Energy Astrophysics
+\\ {\itshape Advisor:} Tapas Kumar Das (\href{mailto:tapas@hri.res.in}{tapas@hri.res.in})%
 
 \vspace{0.5em}
 \end{CVContent}
 \begin{CVContent}
-{\bfseries Master of Science (MSc)} \hfill September 2012 -- June 2014\\
-{\itshape \href{https://www.science.edu}{University of Science}, 321 Science Way, City, Country}
-\\ \href{https://cs.science.edu}{Department of Computer Science}
-\\ {\itshape Advisor:} Jane Smith (\href{mailto:jsmith@science.edu}{jsmith@science.edu})%
+{\bfseries Master of Science (MSc)} \hfill July 2012 -- June 2014\\
+{\itshape \href{\detokenize{https://www.hri.res.in}}{Harish-Chandra Research Institute}}\\
+Chhatnag Road, Jhunsi, Prayagraj, 211019, Uttar Pradesh, India
+\\ Cosmology \& High Energy Astrophysics
+\\ {\itshape Advisor:} Tapas Kumar Das (\href{mailto:tapas@hri.res.in}{tapas@hri.res.in})%
 
 \vspace{0.5em}
 \end{CVContent}
 \begin{CVContent}
-{\bfseries Bachelor of Science (BSc)} \hfill September 2009 -- June 2012\\
-{\itshape \href{https://www.engineering.edu}{University of Engineering}, 555 Engineering Rd, City, Country}
-\\ \href{https://coe.engineering.edu}{Department of Computer Engineering}
+{\bfseries Bachelor of Science (BSc)} \hfill July 2009 -- June 2012\\
+{\itshape \href{\detokenize{http://www.jaduniv.edu.in/}}{Jadavpur University}}\\
+188, Raja S.C. Mallick Rd, Kolkata 700032, India
+\\ Faculty of Physics
 
 \vspace{0.5em}
 \end{CVContent}
 
 \CVSection{Publications}
+% Render each bib collection as a titled subsection with reverse numbering
+\subsection*{\detokenize{Short author publications}}
+\begin{CVContent}
+\setcounter{bibcount}{19}
 \begin{enumerate}
-\item Author Name, Co-Author Name. ``Machine Learning for Scientific Discovery.'' \textit{Journal of Machine Learning Research}, 2021. DOI: \href{https://doi.org/10.1234&#x2F;jmlr.2021.001}{10.1234&#x2F;jmlr.2021.001}
-\item Author Name, Another Author. ``Deep Learning Applications in Physics.'' \textit{Nature Machine Intelligence}, 2020. DOI: \href{https://doi.org/10.1038&#x2F;s42256-020-0001}{10.1038&#x2F;s42256-020-0001}
-\item Author Name, et al.. ``Data Analysis Techniques in Modern Research.'' \textit{International Conference on Machine Learning (ICML)}, 2019.
+\item[\arabic{bibcount}.] Nee, P. J., Ravichandran, A., Field, S. E., Islam, T., Pfeiffer, H. P., Varma, V., Boyle, M., Ceja, A., Ghadiri, N., Kidder, L. E., Kumar, P., Maurya, A., Morales, M., Ramos-Buades, A., Ravishankar, A., Rink, K., Rüter, H. R., Scheel, M. A., \underline{Shaikh, M. A.}, Tellez, D. ``{Eccentric binary black holes: A new framework for numerical relativity waveform surrogates}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2510.00106}}{arXiv:2510.00106} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Tiwari, A., Bhat, S. A., \underline{Shaikh, M. A.}, Kapadia, S. J. ``{Testing the nature of GW200105 by probing the frequency evolution of eccentricity}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/ae1d74}}{\textit{Astrophys. J.}}, \textbf{995}, \textit{1}, 2025, \href{\detokenize{https://arxiv.org/abs/2509.26152}}{arXiv:2509.26152} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Bhat, S. A., Tiwari, A., \underline{Shaikh, M. A.}, Kapadia, S. J. ``{Eccentricity evolution consistency test to distinguish eccentric gravitational-wave signals from eccentricity mimickers}.'' \href{\detokenize{https://doi.org/10.1103/rstg-6n6y}}{\textit{Phys. Rev. D}}, \textbf{112}, \textit{12}, 2025, \href{\detokenize{https://arxiv.org/abs/2508.14850}}{arXiv:2508.14850} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] \underline{Shaikh, M. A.}, Varma, V., Ramos-Buades, A., Pfeiffer, H. P., Boyle, M., Kidder, L. E., Scheel, M. A. ``{Defining eccentricity for spin-precessing binaries}.'' \href{\detokenize{https://doi.org/10.1088/1361-6382/ae085d}}{\textit{Class. Quant. Grav.}}, \textbf{42}, 2025, \href{\detokenize{https://arxiv.org/abs/2507.08345}}{arXiv:2507.08345} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Chartier, N., \underline{Shaikh, M. A.}, Lee, H. M., Kim, J. ``{Comparison between best-fit eccentricity definitions and the standardized definition of eccentricity}.'' \href{\detokenize{https://doi.org/10.1103/kh4t-k6cn}}{\textit{Phys. Rev. D}}, \textbf{112}, \textit{2}, 2025, \href{\detokenize{https://arxiv.org/abs/2503.19538}}{arXiv:2503.19538} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Deka, U., Prabhu, G., \underline{Shaikh, M. A.}, Kapadia, S. J., Varma, V., Field, S. E. ``{Surrogate modeling of gravitational waves microlensed by spherically symmetric potentials}.'' \href{\detokenize{https://doi.org/10.1103/PhysRevD.111.104042}}{\textit{Phys. Rev. D}}, \textbf{111}, \textit{10}, 2025, \href{\detokenize{https://arxiv.org/abs/2501.02974}}{arXiv:2501.02974} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Deka, U., Chakraborty, S., Kapadia, S. J., \underline{Shaikh, M. A.}, Ajith, P. ``{Probing the charge of compact objects with gravitational microlensing of gravitational waves}.'' \href{\detokenize{https://doi.org/10.1103/PhysRevD.111.064028}}{\textit{Phys. Rev. D}}, \textbf{111}, \textit{6}, 2025, \href{\detokenize{https://arxiv.org/abs/2401.06553}}{arXiv:2401.06553} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] \underline{Shaikh, M. A.}, Bhat, S. A., Kapadia, S. J. ``{A study of the inspiral-merger-ringdown consistency test with gravitational-wave signals from compact binaries in eccentric orbits}.'' \href{\detokenize{https://doi.org/10.1103/PhysRevD.110.024030}}{\textit{Phys. Rev. D}}, \textbf{110}, \textit{2}, 2024, \href{\detokenize{https://arxiv.org/abs/2402.15110}}{arXiv:2402.15110} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] \underline{Shaikh, M. A.}, Varma, V., Pfeiffer, H. P., Ramos-Buades, A., van de Meent, M. ``{Defining eccentricity for gravitational wave astronomy}.'' \href{\detokenize{https://doi.org/10.1103/PhysRevD.108.104007}}{\textit{Phys. Rev. D}}, \textbf{108}, \textit{10}, 2023, \href{\detokenize{https://arxiv.org/abs/2302.11257}}{arXiv:2302.11257} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Singh, M. K., Divyajyoti, D., Kapadia, S. J., \underline{Shaikh, M. A.}, Ajith, P. ``{Improved early-warning estimates of luminosity distance and orbital inclination of compact binary mergers using higher modes of gravitational radiation}.'' \href{\detokenize{https://doi.org/10.1093/mnras/stac852}}{\textit{Mon. Not. Roy. Astron. Soc.}}, \textbf{513}, \textit{3}, 2022, \href{\detokenize{https://arxiv.org/abs/2202.05802}}{arXiv:2202.05802} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Maity, S., \underline{Shaikh, M. A.}, Tarafdar, P., Das, T. K. ``{Carter-Penrose diagrams for emergent spacetime in axisymmetrically accreting black hole systems}.'' \href{\detokenize{https://doi.org/10.1103/PhysRevD.106.044062}}{\textit{Phys. Rev. D}}, \textbf{106}, \textit{4}, 2022, \href{\detokenize{https://arxiv.org/abs/2106.07598}}{arXiv:2106.07598} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Wei, W., Huerta, E. A., Yun, M., Loutrel, N., \underline{Shaikh, M. A.}, Kumar, P., Haas, R., Kindratenko, V. ``{Deep Learning with Quantized Neural Networks for Gravitational-wave Forecasting of Eccentric Compact Binary Coalescence}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/ac1121}}{\textit{Astrophys. J.}}, \textbf{919}, \textit{2}, 2021, \href{\detokenize{https://arxiv.org/abs/2012.03963}}{arXiv:2012.03963} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Singh, M. K., Kapadia, S. J., \underline{Shaikh, M. A.}, Chatterjee, D., Ajith, P. ``{Improved early warning of compact binary mergers using higher modes of gravitational radiation: A population study}.'' \href{\detokenize{https://doi.org/10.1093/mnras/stab125}}{\textit{Mon. Not. Roy. Astron. Soc.}}, \textbf{502}, \textit{2}, 2021, \href{\detokenize{https://arxiv.org/abs/2010.12407}}{arXiv:2010.12407} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Kapadia, S. J., Singh, M. K., \underline{Shaikh, M. A.}, Chatterjee, D., Ajith, P. ``{Of Harbingers and Higher Modes: Improved gravitational-wave early-warning of compact binary mergers}.'' \href{\detokenize{https://doi.org/10.3847/2041-8213/aba42d}}{\textit{Astrophys. J. Lett.}}, \textbf{898}, \textit{2}, 2020, \href{\detokenize{https://arxiv.org/abs/2005.08830}}{arXiv:2005.08830} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] \underline{Shaikh, M. A.}, Maity, S., Nag, S., Das, T. K. ``{Effective sound speed in relativistic accretion discs around Schwarzschild black holes}.'' \href{\detokenize{https://doi.org/10.1016/j.newast.2018.12.001}}{\textit{New Astron.}}, \textbf{69}, 2019, \href{\detokenize{https://arxiv.org/abs/1806.04084}}{arXiv:1806.04084} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] \underline{Shaikh, M. A.}, Das, T. K. ``{Linear perturbations of low angular momentum accretion flow in the Kerr metric and the corresponding emergent gravity phenomena}.'' \href{\detokenize{https://doi.org/10.1103/PhysRevD.98.123022}}{\textit{Phys. Rev. D}}, \textbf{98}, \textit{12}, 2018, \href{\detokenize{https://arxiv.org/abs/1803.09896}}{arXiv:1803.09896} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] \underline{Shaikh, M. A.}. ``{Relativistic sonic geometry for isothermal accretion in the Kerr metric}.'' \href{\detokenize{https://doi.org/10.1088/1361-6382/aaa5cd}}{\textit{Class. Quant. Grav.}}, \textbf{35}, \textit{5}, 2018, \href{\detokenize{https://arxiv.org/abs/1705.04918}}{arXiv:1705.04918} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Datta, S., \underline{Shaikh, M. A.}, Das, T. K. ``{Acoustic geometry obtained through the perturbation of the Bernoulli's constant}.'' \href{\detokenize{https://doi.org/10.1016/j.newast.2018.03.003}}{\textit{New Astron.}}, \textbf{63}, 2018, \href{\detokenize{https://arxiv.org/abs/1612.07954}}{arXiv:1612.07954} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] \underline{Shaikh, M. A.}, Firdousi, I., Das, T. K. ``{Relativistic sonic geometry for isothermal accretion in the Schwarzschild metric}.'' \href{\detokenize{https://doi.org/10.1088/1361-6382/aa7b19}}{\textit{Class. Quant. Grav.}}, \textbf{34}, \textit{15}, 2017, \href{\detokenize{https://arxiv.org/abs/1612.07963}}{arXiv:1612.07963} \addtocounter{bibcount}{-1}
 \end{enumerate}
+\end{CVContent}
+\subsection*{\detokenize{SXS Collaboration}}
+\begin{CVContent}
+\setcounter{bibcount}{1}
+\begin{enumerate}
+\item[\arabic{bibcount}.] Scheel, M. A., others. ``{The SXS Collaboration's third catalog of binary black hole simulations}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2505.13378}}{arXiv:2505.13378} \addtocounter{bibcount}{-1}
+\end{enumerate}
+\end{CVContent}
+\subsection*{\detokenize{LVK Collaboration}}
+\begin{CVContent}
+\setcounter{bibcount}{34}
+\begin{enumerate}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{Directional Search for Persistent Gravitational Waves: Results from the First Part of LIGO-Virgo-KAGRA's Fourth Observing Run}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2510.17487}}{arXiv:2510.17487} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{Directed searches for gravitational waves from ultralight vector boson clouds around merger remnant and galactic black holes during the first part of the fourth LIGO-Virgo-KAGRA observing run}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2509.07352}}{arXiv:2509.07352} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{GW250114: Testing Hawking's Area Law and the Kerr Nature of Black Holes}.'' \href{\detokenize{https://doi.org/10.1103/kw5g-d732}}{\textit{Phys. Rev. Lett.}}, \textbf{135}, \textit{11}, 2025, \href{\detokenize{https://arxiv.org/abs/2509.08054}}{arXiv:2509.08054} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{GWTC-4.0: Constraints on the Cosmic Expansion Rate and Modified Gravitational-wave Propagation}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2509.04348}}{arXiv:2509.04348} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{Upper Limits on the Isotropic Gravitational-Wave Background from the first part of LIGO, Virgo, and KAGRA's fourth Observing Run}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2508.20721}}{arXiv:2508.20721} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{Open Data from LIGO, Virgo, and KAGRA through the First Part of the Fourth Observing Run}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2508.18079}}{arXiv:2508.18079} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{GWTC-4.0: Updating the Gravitational-Wave Transient Catalog with Observations from the First Part of the Fourth LIGO-Virgo-KAGRA Observing Run}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2508.18082}}{arXiv:2508.18082} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{GWTC-4.0: Population Properties of Merging Compact Binaries}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2508.18083}}{arXiv:2508.18083} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{GWTC-4.0: Methods for Identifying and Characterizing Gravitational-wave Transients}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2508.18081}}{arXiv:2508.18081} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{GWTC-4.0: An Introduction to Version 4.0 of the Gravitational-Wave Transient Catalog}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2508.18080}}{arXiv:2508.18080} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{All-sky search for long-duration gravitational-wave transients in the first part of the fourth LIGO-Virgo-KAGRA Observing run}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2507.12282}}{arXiv:2507.12282} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{All-sky search for short gravitational-wave bursts in the first part of the fourth LIGO-Virgo-KAGRA observing run}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2507.12374}}{arXiv:2507.12374} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{GW231123: a Binary Black Hole Merger with Total Mass 190-265 $M_o$}.'', 2025, \href{\detokenize{https://arxiv.org/abs/2507.08219}}{arXiv:2507.08219} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{Search for Continuous Gravitational Waves from Known Pulsars in the First Part of the Fourth LIGO-Virgo-KAGRA Observing Run}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/adb3a0}}{\textit{Astrophys. J.}}, \textbf{983}, \textit{2}, 2025, \href{\detokenize{https://arxiv.org/abs/2501.01495}}{arXiv:2501.01495} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{Search for Gravitational Waves Emitted from SN 2023ixf}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/adc681}}{\textit{Astrophys. J.}}, \textbf{985}, \textit{2}, 2025, \href{\detokenize{https://arxiv.org/abs/2410.16565}}{arXiv:2410.16565} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{A Search Using GEO600 for Gravitational Waves Coincident with Fast Radio Bursts from SGR 1935+2154}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/ad8de0}}{\textit{Astrophys. J.}}, \textbf{977}, \textit{2}, 2024, \href{\detokenize{https://arxiv.org/abs/2410.09151}}{arXiv:2410.09151} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Raman, G., others. ``{Swift-BAT GUANO Follow-up of Gravitational-wave Triggers in the Third LIGO-Virgo-KAGRA Observing Run}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/ad9749}}{\textit{Astrophys. J.}}, \textbf{980}, \textit{2}, 2025, \href{\detokenize{https://arxiv.org/abs/2407.12867}}{arXiv:2407.12867} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{Observation of Gravitational Waves from the Coalescence of a 2.5-4.5 M $_{o}$ Compact Object and a Neutron Star}.'' \href{\detokenize{https://doi.org/10.3847/2041-8213/ad5beb}}{\textit{Astrophys. J. Lett.}}, \textbf{970}, \textit{2}, 2024, \href{\detokenize{https://arxiv.org/abs/2404.04248}}{arXiv:2404.04248} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{Ultralight vector dark matter search using data from the KAGRA O3GK run}.'' \href{\detokenize{https://doi.org/10.1103/PhysRevD.110.042001}}{\textit{Phys. Rev. D}}, \textbf{110}, \textit{4}, 2024, \href{\detokenize{https://arxiv.org/abs/2403.03004}}{arXiv:2403.03004} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Fletcher, C., others. ``{A Joint Fermi-GBM and Swift-BAT Analysis of Gravitational-wave Candidates from the Third Gravitational-wave Observing Run}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/ad1eed}}{\textit{Astrophys. J.}}, \textbf{964}, \textit{2}, 2024, \href{\detokenize{https://arxiv.org/abs/2308.13666}}{arXiv:2308.13666} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abac, A. G., others. ``{Search for Eccentric Black Hole Coalescences during the Third Observing Run of LIGO and Virgo}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/ad65ce}}{\textit{Astrophys. J.}}, \textbf{973}, \textit{2}, 2024, \href{\detokenize{https://arxiv.org/abs/2308.03822}}{arXiv:2308.03822} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{Search for Gravitational-lensing Signatures in the Full Third Observing Run of the LIGO-Virgo Network}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/ad3e83}}{\textit{Astrophys. J.}}, \textbf{970}, \textit{2}, 2024, \href{\detokenize{https://arxiv.org/abs/2304.08393}}{arXiv:2304.08393} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{Open Data from the Third Observing Run of LIGO, Virgo, KAGRA, and GEO}.'' \href{\detokenize{https://doi.org/10.3847/1538-4365/acdc9f}}{\textit{Astrophys. J. Suppl.}}, \textbf{267}, \textit{2}, 2023, \href{\detokenize{https://arxiv.org/abs/2302.03676}}{arXiv:2302.03676} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{Search for subsolar-mass black hole binaries in the second part of Advanced LIGO's and Advanced Virgo's third observing run}.'' \href{\detokenize{https://doi.org/10.1093/mnras/stad588}}{\textit{Mon. Not. Roy. Astron. Soc.}}, \textbf{524}, \textit{4}, 2023, \href{\detokenize{https://arxiv.org/abs/2212.01477}}{arXiv:2212.01477} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{Search for Gravitational-wave Transients Associated with Magnetar Bursts in Advanced LIGO and Advanced Virgo Data from the Third Observing Run}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/ad27d3}}{\textit{Astrophys. J.}}, \textbf{966}, \textit{1}, 2024, \href{\detokenize{https://arxiv.org/abs/2210.10931}}{arXiv:2210.10931} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{Model-based Cross-correlation Search for Gravitational Waves from the Low-mass X-Ray Binary Scorpius X-1 in LIGO O3 Data}.'' \href{\detokenize{https://doi.org/10.3847/2041-8213/aca1b0}}{\textit{Astrophys. J. Lett.}}, \textbf{941}, \textit{2}, 2022, \href{\detokenize{https://arxiv.org/abs/2209.02863}}{arXiv:2209.02863} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{Search for continuous gravitational wave emission from the Milky~Way center in O3 LIGO-Virgo data}.'' \href{\detokenize{https://doi.org/10.1103/PhysRevD.106.042003}}{\textit{Phys. Rev. D}}, \textbf{106}, \textit{4}, 2022, \href{\detokenize{https://arxiv.org/abs/2204.04523}}{arXiv:2204.04523} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{First joint observation by the underground gravitational-wave detector KAGRA with GEO 600}.'' \href{\detokenize{https://doi.org/10.1093/ptep/ptac073}}{\textit{PTEP}}, \textbf{2022}, \textit{6}, 2022, \href{\detokenize{https://arxiv.org/abs/2203.01270}}{arXiv:2203.01270} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{Search for gravitational waves from Scorpius X-1 with a hidden Markov model in O3 LIGO data}.'' \href{\detokenize{https://doi.org/10.1103/PhysRevD.106.062002}}{\textit{Phys. Rev. D}}, \textbf{106}, \textit{6}, 2022, \href{\detokenize{https://arxiv.org/abs/2201.10104}}{arXiv:2201.10104} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{All-sky search for continuous gravitational waves from isolated neutron stars using Advanced LIGO and Advanced Virgo O3 data}.'' \href{\detokenize{https://doi.org/10.1103/PhysRevD.106.102008}}{\textit{Phys. Rev. D}}, \textbf{106}, \textit{10}, 2022, \href{\detokenize{https://arxiv.org/abs/2201.00697}}{arXiv:2201.00697} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{Tests of General Relativity with GWTC-3}.'', 2021, \href{\detokenize{https://arxiv.org/abs/2112.06861}}{arXiv:2112.06861} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{All-sky search for gravitational wave emission from scalar boson clouds around spinning black holes in LIGO O3 data}.'' \href{\detokenize{https://doi.org/10.1103/PhysRevD.105.102001}}{\textit{Phys. Rev. D}}, \textbf{105}, \textit{10}, 2022, \href{\detokenize{https://arxiv.org/abs/2111.15507}}{arXiv:2111.15507} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{Searches for Gravitational Waves from Known Pulsars at Two Harmonics in the Second and Third LIGO-Virgo Observing Runs}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/ac6acf}}{\textit{Astrophys. J.}}, \textbf{935}, \textit{1}, 2022, \href{\detokenize{https://arxiv.org/abs/2111.13106}}{arXiv:2111.13106} \addtocounter{bibcount}{-1}
+\item[\arabic{bibcount}.] Abbott, R., others. ``{Constraints on the Cosmic Expansion History from GWTC-3}.'' \href{\detokenize{https://doi.org/10.3847/1538-4357/ac74bb}}{\textit{Astrophys. J.}}, \textbf{949}, \textit{2}, 2023, \href{\detokenize{https://arxiv.org/abs/2111.03604}}{arXiv:2111.03604} \addtocounter{bibcount}{-1}
+\end{enumerate}
+\end{CVContent}
 
 \CVSection{Research Visits}
+\begin{CVContent}
+\newcounter{visitcount}
+\setcounter{visitcount}{20}
 \begin{enumerate}
-\item
-Dr. Albert Einstein, %
-Institute for Advanced Study
-, School of Natural Sciences, %
-Princeton, USA, %
-June 15, 2019 -- September 15, 2019
-\item
-Dr. Marie Curie, %
-CERN
-, Physics Department, %
-Geneva, Switzerland, %
-July 1, 2018 -- August 31, 2018
+\item[\arabic{visitcount}.] \href{\detokenize{https://www.ewha.ac.kr/ewhaen/professor/info.do?mode=view&pId=nufukFY1RWc4mY1OSKh5OA%3D%3D}}{Chunglee Kim}, \href{\detokenize{https://www.ewha.ac.kr/ewhaen/index.do}}{Ewha Womans University}, Seoul, Korea, October 20, 2025 -- October 21, 2025 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] Hyung Mok Lee, \href{\detokenize{https://en.snu.ac.kr/}}{Seoul National University}, Seoul, Korea, October 15, 2025 -- October 25, 2025 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://www.icts.res.in/people/prayush-kumar}}{Prayush Kumar}, \href{\detokenize{https://www.icts.res.in/}}{ICTS-TIFR}, Bangalore, India, August 4, 2025 -- August 10, 2025 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://shasvath-kapadia.github.io/home/}}{Shasvath Kapadia}, \href{\detokenize{https://www.iucaa.in/}}{IUCAA}, Pune, India, June 16, 2025 -- June 22, 2025 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] Hyung Mok Lee, \href{\detokenize{https://en.snu.ac.kr/}}{Seoul National University}, Seoul, Korea, October 10, 2024 -- October 20, 2024 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] Hyung Won Lee, \href{\detokenize{https://www.inje.ac.kr/english/}}{Inje University}, Gimhae, Korea, November 2, 2023 -- November 3, 2023 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://shasvath-kapadia.github.io/home/}}{Shasvath Kapadia}, \href{\detokenize{https://www.iucaa.in/}}{IUCAA}, Pune, India, June 18, 2023 -- June 21, 2023 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://www.icts.res.in/people/prayush-kumar}}{Prayush Kumar}, \href{\detokenize{https://www.icts.res.in/}}{ICTS-TIFR}, Bangalore, India, June 15, 2023 -- June 18, 2023 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] Zhoujian Cao, \href{\detokenize{https://english.bnu.edu.cn/}}{BNU}, Beijing, China, May 9, 2023 -- May 11, 2023 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://cosmology.kasi.re.kr/shafieloo/}}{Arman Shafieloo}, \href{\detokenize{https://www.kasi.re.kr/eng/index}}{KASI}, Daejeon, Korea, April 19, 2023 -- April 20, 2023 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] Young Bok Bae, \href{\detokenize{https://www.ibs.re.kr/eng.do}}{IBS}, Daejeon, Korea, April 18, 2023 -- April 19, 2023 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://www.s.u-tokyo.ac.jp/en/people/yokoyama_junichi/}}{Junichi Yokoyama}, \href{\detokenize{https://www.oit.ac.jp/english/}}{UoT}, Tokyo, Japan, November 17, 2022 -- November 19, 2022 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://www.oit.ac.jp/is/shinkai/his/}}{Hisa-aki Shinkai}, \href{\detokenize{https://www.oit.ac.jp/english/}}{OIT}, Osaka, Japan, November 15, 2022 -- November 17, 2022 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://www2.yukawa.kyoto-u.ac.jp/~kunihito.ioka/}}{Kunihito Ioka}, \href{\detokenize{https://www.yukawa.kyoto-u.ac.jp/en-GB/}}{YITP}, Kyoto, Japan, November 13, 2022 -- November 15, 2022 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://www.aei.mpg.de/employees/51192/151048}}{Frank Ohme}, \href{\detokenize{https://www.aei.mpg.de/}}{AEI}, Hannover, Germany, April 20, 2022 -- April 24, 2022 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://www.aei.mpg.de/person/54205}}{Harald Pfeiffer}, \href{\detokenize{https://www.aei.mpg.de/}}{AEI}, Potsdam, Germany, March 20, 2022 -- April 20, 2022 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://www.hri.res.in/~tapas/}}{Tapas Kumar Das}, \href{\detokenize{https://www.hri.res.in/}}{HRI}, Allahabad, India, November 15, 2019 -- November 25, 2019 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://home.icts.res.in/~ajith/Home.html}}{P Ajith}, \href{\detokenize{https://www.icts.res.in/}}{ICTS-TIFR}, Bangalore, India, March 25, 2019 -- April 6, 2019 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] \href{\detokenize{https://home.icts.res.in/~ajith/Home.html}}{P Ajith}, \href{\detokenize{https://www.icts.res.in/}}{ICTS-TIFR}, Bangalore, India, September 27, 2017 -- October 11, 2017 \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] Tarun Souradeep, \href{\detokenize{https://www.iucaa.in/}}{IUCAA}, Pune, India, September 6, 2014 -- October 20, 2014 \addtocounter{visitcount}{-1}
 \end{enumerate}
+\end{CVContent}
 
 \end{document}

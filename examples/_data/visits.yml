@@ -1,31 +1,337 @@
-IAS-Princeton-2019:
-  from-year: 2019
+Ewha-October-2025:
+  from-year: 2025
+  from-month: October
+  from-date: 20
+  to-year: 2025
+  to-month: October
+  to-date: 21
+  institute: Ewha Womans University
+  institute-url: https://www.ewha.ac.kr/ewhaen/index.do
+  department: Department of Physics
+  department-url: 
+  host: Chunglee Kim
+  host-url: "https://www.ewha.ac.kr/ewhaen/professor/info.do?mode=view&pId=nufukFY1RWc4mY1OSKh5OA%3D%3D"
+  city: Seoul
+  country: Korea
+
+SNU-October-2025:
+  from-year: 2025
+  from-month: October
+  from-date: 15
+  to-year: 2025
+  to-month: October
+  to-date: 25
+  institute: Seoul National University
+  institute-url: https://en.snu.ac.kr/
+  department: Department of Astronomy
+  department-url:
+  host: Hyung Mok Lee
+  host-url: 
+  city: Seoul
+  country: Korea
+
+# CUHK_2025:
+#   from-year: 2025
+#   from-month: October
+#   from-date: 10
+#   to-year: 2025
+#   to-month: October
+#   to-date: 15
+#   institute: CUHK
+#   institute-url: https://www.cuhk.edu.hk/english/index.html
+#   department: CUHK GW Group
+#   department-url: https://www.oahannuksela.com/cuhk-gw-group/
+#   host: Otto A. Hannuksela
+#   host-url: https://www.oahannuksela.com/
+#   city: Hong Kong
+#   country: Hong Kong
+
+ICTS-Bangalore-2025:
+  from-year: 2025
+  from-month: August
+  from-date: 4
+  to-year: 2025
+  to-month: August
+  to-date: 10
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/
+  department: Astrophysical Relativity
+  department-url: https://www.icts.res.in/research/astrorel
+  host: Prayush Kumar
+  host-url: https://www.icts.res.in/people/prayush-kumar
+  city: Bangalore
+  country: India
+
+IUCAA-June-2025:
+  from-year: 2025
+  from-month: June
+  from-date: 16
+  to-year: 2025
+  to-month: June
+  to-date: 22
+  institute: IUCAA
+  institute-url: https://www.iucaa.in/
+  department: Gravitational Wave Group
+  department-url:
+  host: Shasvath Kapadia
+  host-url: https://shasvath-kapadia.github.io/home/
+  city: Pune
+  country: India
+
+SNU-October-2024:
+  from-year: 2024
+  from-month: October
+  from-date: 10
+  to-year: 2024
+  to-month: October
+  to-date: 20
+  institute: Seoul National University
+  institute-url: https://en.snu.ac.kr/
+  department: Department of Astronomy
+  department-url:
+  host: Hyung Mok Lee
+  host-url: 
+  city: Seoul
+  country: Korea
+  
+Inje-November-2023:
+  from-year: 2023
+  from-month: November
+  from-date: 2
+  to-year: 2023
+  to-month: November
+  to-date: 3
+  institute: Inje University
+  institute-url: https://www.inje.ac.kr/english/
+  department: Department of Computer Simulation
+  department-url:
+  host: Hyung Won Lee
+  host-url: 
+  city: Gimhae
+  country: Korea
+  
+IUCAA-June-2023:
+  from-year: 2023
+  from-month: June
+  from-date: 18
+  to-year: 2023
+  to-month: June
+  to-date: 21
+  institute: IUCAA
+  institute-url: https://www.iucaa.in/
+  department: Gravitational Wave Group
+  department-url:
+  host: Shasvath Kapadia
+  host-url: https://shasvath-kapadia.github.io/home/
+  city: Pune
+  country: India
+
+ICTS-Bangalore-2023:
+  from-year: 2023
   from-month: June
   from-date: 15
-  to-year: 2019
-  to-month: September
-  to-date: 15
-  institute: Institute for Advanced Study
-  institute-url: https://www.ias.edu
-  department: School of Natural Sciences
-  department-url: https://www.ias.edu/sns
-  host: Dr. Albert Einstein
-  host-url: https://www.ias.edu/scholars/einstein
-  city: Princeton
-  country: USA
+  to-year: 2023
+  to-month: June
+  to-date: 18
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/
+  department: Astrophysical Relativity
+  department-url: https://www.icts.res.in/research/astrorel
+  host: Prayush Kumar
+  host-url: https://www.icts.res.in/people/prayush-kumar
+  city: Bangalore
+  country: India
 
-CERN-Geneva-2018:
-  from-year: 2018
-  from-month: July
-  from-date: 1
-  to-year: 2018
-  to-month: August
-  to-date: 31
-  institute: CERN
-  institute-url: https://home.cern
-  department: Physics Department
-  department-url: https://home.cern/science/physics
-  host: Dr. Marie Curie
-  host-url: https://home.cern/about/people
-  city: Geneva
-  country: Switzerland
+BNU-May-2023:
+  from-year: 2023
+  from-month: May
+  from-date: 9
+  to-year: 2023
+  to-month: May
+  to-date: 11
+  institute: BNU
+  institute-url: https://english.bnu.edu.cn/
+  department: Department of Astronomy
+  department-url: https://astro.bnu.edu.cn/english/index.html
+  host: Zhoujian Cao
+  host-url:
+  city: Beijing
+  country: China
+
+KASI-Daejeon-2023:
+  from-year: 2023
+  from-month: April
+  from-date: 19
+  to-year: 2023
+  to-month: April
+  to-date: 20
+  institute: KASI
+  institute-url: https://www.kasi.re.kr/eng/index
+  department: Cosmology Group
+  department-url: https://cosmology.kasi.re.kr/shafieloo/coskasi.html
+  host: Arman Shafieloo
+  host-url: https://cosmology.kasi.re.kr/shafieloo/
+  city: Daejeon
+  country: Korea
+
+IBS-Daejeon-2023:
+  from-year: 2023
+  from-month: April
+  from-date: 18
+  to-year: 2023
+  to-month: April
+  to-date: 19
+  institute: IBS
+  institute-url: https://www.ibs.re.kr/eng.do
+  department: Center for Theoretical Physics of the Unvierse
+  department-url: https://www.ibs.re.kr/ctpu/
+  host: Young Bok Bae
+  host-url:
+  city: Daejeon
+  country: Korea
+
+UoT-Tokyo-2022:
+  from-year: 2022
+  from-month: November
+  from-date: 17
+  to-year: 2022
+  to-month: November
+  to-date: 19
+  institute: UoT
+  institute-url: https://www.oit.ac.jp/english/
+  department: Research Center for the Early Universe
+  department-url: https://www.resceu.s.u-tokyo.ac.jp/top.php
+  host: Junichi Yokoyama
+  host-url: https://www.s.u-tokyo.ac.jp/en/people/yokoyama_junichi/
+  city: Tokyo
+  country: Japan
+
+OIT-Osaka-2022:
+  from-year: 2022
+  from-month: November
+  from-date: 15
+  to-year: 2022
+  to-month: November
+  to-date: 17
+  institute: OIT
+  institute-url: https://www.oit.ac.jp/english/
+  department: Faculty of Information Science and Technology
+  department-url: https://www.oit.ac.jp/english/education/ist/
+  host:  Hisa-aki Shinkai
+  host-url: https://www.oit.ac.jp/is/shinkai/his/
+  city: Osaka
+  country: Japan
+
+YITP-Kyoto-2022:
+  from-year: 2022
+  from-month: November
+  from-date: 13
+  to-year: 2022
+  to-month: November
+  to-date: 15
+  institute: YITP
+  institute-url: https://www.yukawa.kyoto-u.ac.jp/en-GB/
+  department: Center for Gravitational Physics
+  department-url: https://www2.yukawa.kyoto-u.ac.jp/~cgp/en/index.html
+  host:  Kunihito Ioka
+  host-url: https://www2.yukawa.kyoto-u.ac.jp/~kunihito.ioka/
+  city: Kyoto
+  country: Japan
+
+AEI-Hannover-2022:
+  from-year: 2022
+  from-month: April
+  from-date: 20
+  to-year: 2022
+  to-month: April
+  to-date: 24
+  institute: AEI
+  institute-url: https://www.aei.mpg.de/
+  department: Binary Merger Observations and Numerical Relativity
+  department-url: https://www.aei.mpg.de/BinaryObservationsNR
+  host:  Frank Ohme
+  host-url: https://www.aei.mpg.de/employees/51192/151048
+  city: Hannover
+  country: Germany
+
+AEI-Potsdam-2022:
+  from-year: 2022
+  from-month: March
+  from-date: 20
+  to-year: 2022
+  to-month: April
+  to-date: 20
+  institute: AEI
+  institute-url: https://www.aei.mpg.de/
+  department: Astrophysical and Cosmological Relativity
+  department-url: https://www.aei.mpg.de/astro-cosmo-rel
+  host:  Harald Pfeiffer
+  host-url: https://www.aei.mpg.de/person/54205
+  city: Potsdam
+  country: Germany
+
+HRI-Allahabad-2019:
+  from-year: 2019
+  from-month: November
+  from-date: 15
+  to-year: 2019
+  to-month: November
+  to-date: 25
+  institute: HRI
+  institute-url: https://www.hri.res.in/
+  department: Cosmology and High Energy Astrophysics
+  department-url:
+  host:  Tapas Kumar Das
+  host-url: https://www.hri.res.in/~tapas/
+  city: Allahabad
+  country: India
+
+ICTS-Bangalore-2019:
+  from-year: 2019
+  from-month: March
+  from-date: 25
+  to-year: 2019
+  to-month: April
+  to-date: 6
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/
+  department: Astrophysical Relativity
+  department-url: https://www.icts.res.in/research/astrorel
+  host:  P Ajith
+  host-url: https://home.icts.res.in/~ajith/Home.html
+  city: Bangalore
+  country: India
+
+ICTS-Bangalore-2017:
+  from-year: 2017
+  from-month: September
+  from-date: 27
+  to-year: 2017
+  to-month: October
+  to-date: 11
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/
+  department: Astrophysical Relativity
+  department-url: https://www.icts.res.in/research/astrorel
+  host:  P Ajith
+  host-url: https://home.icts.res.in/~ajith/Home.html
+  city: Bangalore
+  country: India
+
+IUCAA-Pune-2014:
+  from-year: 2014
+  from-month: September
+  from-date: 6
+  to-year: 2014
+  to-month: October
+  to-date: 20
+  institute: IUCAA
+  institute-url: https://www.iucaa.in/
+  department: Cosmology Group
+  department-url:
+  host:  Tarun Souradeep
+  host-url:
+  city: Pune
+  country: India
+
+
