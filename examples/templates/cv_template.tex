@@ -1,0 +1,103 @@
+\documentclass[11pt,a4paper]{article}
+
+% Modern packages for better typography and layout
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern} % Latin Modern font for better readability
+\usepackage[margin=0.75in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% Define colors for a modern look
+\definecolor{headercolor}{RGB}{0, 51, 102}
+\definecolor{linkcolor}{RGB}{0, 102, 204}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    urlcolor=linkcolor,
+    citecolor=linkcolor
+}
+
+% Customize section formatting
+\titleformat{\section}
+  {\Large\bfseries\color{headercolor}}
+  {}
+  {0em}
+  {}
+  [\titlerule]
+
+\titleformat{\subsection}
+  {\large\bfseries}
+  {}
+  {0em}
+  {}
+
+% Reduce spacing
+\titlespacing*{\section}{0pt}{12pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
+\titlespacing*{\subsection}{0pt}{8pt plus 3pt minus 2pt}{4pt plus 1pt minus 1pt}
+
+% Configure enumerate
+\setlist[enumerate]{leftmargin=*, itemsep=6pt, parsep=0pt}
+
+% Remove page numbers for a cleaner look
+\pagestyle{empty}
+
+\begin{document}
+
+% Modern CV Header
+{\centering
+{\Huge\bfseries\color{headercolor} Curriculum Vitae}\\[0.5em]
+\vspace{1em}
+}
+
+\section*{Education}
+{{#education}}
+\subsection*{{{degree}}}
+\textit{{{institute}}, {{institute-address}}} \hfill \textbf{{{from-month}} {{from-year}} -- {{#to-year}}{{to-month}} {{to-year}}{{/to-year}}{{^to-year}}Present{{/to-year}}}
+{{#department}}
+
+\textbf{Department:} {{department}}{{#department-website}}, \href{{{department-website}}}{{{department-website}}}{{/department-website}}{{/department}}
+{{#advisor}}
+
+\textbf{Advisor:} {{advisor}}{{#advisor-email}} (\href{mailto:{{advisor-email}}}{{{advisor-email}}}){{/advisor-email}}{{/advisor}}
+
+\vspace{0.5em}
+{{/education}}
+
+\section*{Positions}
+{{#positions}}
+\subsection*{{{position}}}
+\textit{{{institute}}, {{institute-address}}} \hfill \textbf{{{from-month}} {{from-year}} -- {{#to-year}}{{to-month}} {{to-year}}{{/to-year}}{{^to-year}}Present{{/to-year}}}
+{{#department}}
+
+\textbf{Department:} {{department}}{{#department-website}}, \href{{{department-website}}}{{{department-website}}}{{/department-website}}{{/department}}
+
+\vspace{0.5em}
+{{/positions}}
+
+\section*{Publications}
+\begin{enumerate}
+{{#publications}}
+\item {{authors}}. ``{{title}}.'' {{#journal}}\textit{{{journal}}}{{/journal}}{{#conference}}\textit{{{conference}}}{{/conference}}, {{year}}.{{#doi}} DOI: \href{https://doi.org/{{doi}}}{{{doi}}}{{/doi}}
+{{/publications}}
+\end{enumerate}
+
+\section*{Research Visits}
+{{#visits}}
+\subsection*{{{institute}}, {{city}}, {{country}}}
+\textbf{{{from-month}} {{from-date}}, {{from-year}} -- {{to-month}} {{to-date}}, {{to-year}}}
+{{#department}}
+
+\textbf{Department:} {{department}}{{/department}}
+{{#host}}
+
+\textbf{Host:} {{host}}{{/host}}
+
+\vspace{0.5em}
+{{/visits}}
+
+\end{document}

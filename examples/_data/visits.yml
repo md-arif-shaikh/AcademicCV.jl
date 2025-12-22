@@ -1,0 +1,31 @@
+IAS-Princeton-2019:
+  from-year: 2019
+  from-month: June
+  from-date: 15
+  to-year: 2019
+  to-month: September
+  to-date: 15
+  institute: Institute for Advanced Study
+  institute-url: https://www.ias.edu
+  department: School of Natural Sciences
+  department-url: https://www.ias.edu/sns
+  host: Dr. Albert Einstein
+  host-url: https://www.ias.edu/scholars/einstein
+  city: Princeton
+  country: USA
+
+CERN-Geneva-2018:
+  from-year: 2018
+  from-month: July
+  from-date: 1
+  to-year: 2018
+  to-month: August
+  to-date: 31
+  institute: CERN
+  institute-url: https://home.cern
+  department: Physics Department
+  department-url: https://home.cern/science/physics
+  host: Dr. Marie Curie
+  host-url: https://home.cern/about/people
+  city: Geneva
+  country: Switzerland

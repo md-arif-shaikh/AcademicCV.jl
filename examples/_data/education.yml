@@ -1,0 +1,41 @@
+PhD:
+  degree: Doctor of Philosophy (PhD)
+  department: Department of Computer Science
+  department-website: https://cs.tech.edu
+  institute: University of Technology
+  institute-website: https://www.tech.edu
+  institute-address: "789 Tech Drive, City, State, 67890, Country"
+  from-year: 2014
+  from-month: August
+  to-year: 2018
+  to-month: May
+  advisor: John Doe
+  advisor-website: https://johndoe.tech.edu
+  advisor-email: johndoe@tech.edu
+
+MSc:
+  degree: Master of Science (MSc)
+  department: Department of Computer Science
+  department-website: https://cs.science.edu
+  institute: University of Science
+  institute-website: https://www.science.edu
+  institute-address: "321 Science Way, City, Country"
+  from-year: 2012
+  from-month: September
+  to-year: 2014
+  to-month: June
+  advisor: Jane Smith
+  advisor-website: https://janesmith.science.edu
+  advisor-email: jsmith@science.edu
+
+BSc:
+  degree: Bachelor of Science (BSc)
+  department: Department of Computer Engineering
+  department-website: https://coe.engineering.edu
+  institute: University of Engineering
+  institute-website: https://www.engineering.edu
+  institute-address: "555 Engineering Rd, City, Country"
+  from-year: 2009
+  from-month: September
+  to-year: 2012
+  to-month: June
