@@ -40,16 +40,33 @@ _data/
 └── visits.yml
 ```
 
-Example `positions.yml`:
+The package supports two YAML formats:
+
+**Format 1: Dictionary/Map structure** (recommended for sections like positions, education, visits):
 
 ```yaml
-- position: "Assistant Professor"
-  institution: "University of Example"
-  location: "City, Country"
-  start_date: "2020"
-  end_date: "Present"
-  description: "Teaching and research in Computer Science"
+assistant_professor:
+  position: Assistant Professor
+  department: Department of Computer Science
+  institute: University of Example
+  institute-website: https://www.example.edu
+  from-year: 2020
+  from-month: September
+  to-year:
+  to-month:
 ```
+
+**Format 2: List/Array structure** (recommended for publications):
+
+```yaml
+- title: "Machine Learning for Scientific Discovery"
+  authors: "Author Name, Co-Author Name"
+  journal: "Journal of Machine Learning Research"
+  year: "2021"
+  doi: "10.1234/jmlr.2021.001"
+```
+
+Both formats work seamlessly with Mustache templates. Dictionary structures are automatically converted to lists for template iteration.
 
 ### 2. Create a LaTeX Template
 
@@ -62,7 +79,7 @@ Create a template file using Mustache syntax:
 \section*{Positions}
 {{#positions}}
 \subsection*{ {{position}} }
-\textit{ {{institution}}, {{location}} } \hfill {{start_date}} -- {{end_date}}
+\textit{ {{institute}} } \hfill {{from-month}} {{from-year}} -- {{#to-year}}{{to-month}} {{to-year}}{{/to-year}}{{^to-year}}Present{{/to-year}}
 {{/positions}}
 
 \end{document}
@@ -169,7 +186,7 @@ jobs:
 ## Examples
 
 See the `examples/` directory for:
-- Sample YAML data files in `examples/_data/`
+- Sample YAML data files in `examples/_data/` matching the format from [md-arif-shaikh.github.io](https://github.com/md-arif-shaikh/md-arif-shaikh.github.io/tree/main/_data)
 - Example LaTeX template in `examples/templates/`
 - Build scripts
 
@@ -185,6 +202,19 @@ This will:
 2. Use the template from `templates/cv_template.tex`
 3. Generate a TeX file in `output/`
 4. Compile to PDF (if pdflatex is available)
+
+### Viewing the Generated PDF
+
+After running the build script, you can find:
+- **LaTeX source**: `examples/output/cv.tex`
+- **PDF output**: `examples/output/cv.pdf` (if LaTeX is installed)
+
+When using GitHub Actions, the generated PDF is available as a workflow artifact. You can:
+1. Go to the Actions tab in your repository
+2. Click on the latest "Build CV" workflow run
+3. Download the `cv-pdf` artifact
+
+Alternatively, you can set up GitHub Pages to automatically publish your CV online.
 
 ## Package Structure
 

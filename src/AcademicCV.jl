@@ -10,6 +10,8 @@ export build_cv, load_data, generate_latex, compile_pdf
 
 Load all YAML files from the specified data directory.
 Returns a dictionary with filenames (without extension) as keys and parsed YAML content as values.
+If the YAML content is a dictionary (not a list), it converts the dictionary values to a list
+for easier iteration in Mustache templates.
 """
 function load_data(data_dir::String)
     if !isdir(data_dir)
@@ -22,7 +24,20 @@ function load_data(data_dir::String)
     for file in yaml_files
         filepath = joinpath(data_dir, file)
         key = replace(file, r"\.(yml|yaml)$" => "")
-        data[key] = YAML.load_file(filepath)
+        yaml_content = YAML.load_file(filepath)
+        
+        # If the YAML content is a dictionary (not a list), convert dict values to a list
+        # This makes it easier to iterate in Mustache templates
+        if isa(yaml_content, Dict) && !isempty(yaml_content)
+            # Check if all values are dictionaries (typical for CV sections)
+            if all(v -> isa(v, Dict), values(yaml_content))
+                data[key] = [v for (k, v) in yaml_content]
+            else
+                data[key] = yaml_content
+            end
+        else
+            data[key] = yaml_content
+        end
     end
     
     return data

@@ -18,18 +18,17 @@
 \section*{Education}
 {{#education}}
 \subsection*{ {{degree}} }
-\textit{ {{institution}}, {{location}} } \hfill {{year}} \\
-{{#thesis}}
-\textbf{Thesis:} {{thesis}}
-{{/thesis}}
+\textit{ {{institute}}, {{institute-address}} } \hfill {{from-month}} {{from-year}} -- {{#to-year}}{{to-month}} {{to-year}}{{/to-year}}{{^to-year}}Present{{/to-year}} \\
+{{#department}}\textbf{Department:} {{department}}{{#department-website}}, \href{ {{department-website}} }{ {{department-website}} }{{/department-website}} \\{{/department}}
+{{#advisor}}\textbf{Advisor:} {{advisor}}{{#advisor-email}} (\href{mailto:{{advisor-email}}}{ {{advisor-email}} }){{/advisor-email}} \\{{/advisor}}
 
 {{/education}}
 
 \section*{Positions}
 {{#positions}}
 \subsection*{ {{position}} }
-\textit{ {{institution}}, {{location}} } \hfill {{start_date}} -- {{end_date}} \\
-{{description}}
+\textit{ {{institute}}, {{institute-address}} } \hfill {{from-month}} {{from-year}} -- {{#to-year}}{{to-month}} {{to-year}}{{/to-year}}{{^to-year}}Present{{/to-year}} \\
+{{#department}}\textbf{Department:} {{department}}{{#department-website}}, \href{ {{department-website}} }{ {{department-website}} }{{/department-website}} \\{{/department}}
 
 {{/positions}}
 
@@ -43,9 +42,10 @@
 
 \section*{Research Visits}
 {{#visits}}
-\subsection*{ {{institution}}, {{location}} }
-{{duration}}, {{year}} \\
-\textit{Purpose:} {{purpose}}
+\subsection*{ {{institute}}, {{city}}, {{country}} }
+{{from-month}} {{from-date}}, {{from-year}} -- {{to-month}} {{to-date}}, {{to-year}} \\
+{{#department}}\textbf{Department:} {{department}} \\{{/department}}
+{{#host}}\textbf{Host:} {{host}} \\{{/host}}
 
 {{/visits}}
 
