@@ -5,6 +5,8 @@
 
 A Julia package for building academic CVs from YAML data files and LaTeX templates.
 
+📄 **[View Example Output](examples/output/cv.tex)** - See the generated LaTeX file
+
 ## Features
 
 - 📄 Load academic data from YAML files (positions, education, publications, visits, etc.)
@@ -188,6 +190,7 @@ jobs:
 See the `examples/` directory for:
 - Sample YAML data files in `examples/_data/` matching the format from [md-arif-shaikh.github.io](https://github.com/md-arif-shaikh/md-arif-shaikh.github.io/tree/main/_data)
 - Example LaTeX template in `examples/templates/`
+- **[Example generated output](examples/output/cv.tex)** - View the LaTeX file produced from the sample data
 - Build scripts
 
 To run the example:
@@ -203,9 +206,16 @@ This will:
 3. Generate a TeX file in `output/`
 4. Compile to PDF (if pdflatex is available)
 
-### Viewing the Generated PDF
+### Viewing the Output
 
-After running the build script, you can find:
+**See the example output here: [examples/output/cv.tex](examples/output/cv.tex)**
+
+This is a pre-generated example showing what the package produces from the sample YAML data. You can:
+- View the LaTeX source directly in the repository
+- Copy and compile it locally with `pdflatex cv.tex` to see the PDF
+- Use an online LaTeX editor like [Overleaf](https://www.overleaf.com/) to compile and view
+
+After running the build script yourself, you can find:
 - **LaTeX source**: `examples/output/cv.tex`
 - **PDF output**: `examples/output/cv.pdf` (if LaTeX is installed)
 

@@ -15,8 +15,10 @@
 *.fdb_latexmk
 *.synctex.gz
 
-# Output files
-/examples/output/
+# Output files (but keep example output for reference)
+/examples/output/*.pdf
+/examples/output/*.aux
+/examples/output/*.log
 
 # OS
 .DS_Store
