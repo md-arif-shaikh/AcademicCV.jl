@@ -3,7 +3,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{geometry}
 \usepackage{hyperref}
-\usepackage{enumitem}
 
 \geometry{margin=1in}
 
@@ -33,7 +32,7 @@
 {{/positions}}
 
 \section*{Publications}
-\begin{enumerate}[leftmargin=*]
+\begin{enumerate}
 {{#publications}}
 \item {{authors}}. ``{{title}}.'' {{#journal}}\textit{ {{journal}} }{{/journal}}{{#conference}}\textit{ {{conference}} }{{/conference}}, {{year}}.{{#doi}} DOI: \href{https://doi.org/{{doi}}}{ {{doi}} }{{/doi}}
 
