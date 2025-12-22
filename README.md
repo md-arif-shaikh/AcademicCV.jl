@@ -10,12 +10,15 @@ A Julia package for building academic CVs from YAML data files and LaTeX templat
 
 ## Features
 
-- 📄 Load academic data from YAML files (positions, education, publications, visits, etc.)
+- 📄 Load academic data from YAML files (positions, education, visits, etc.)
+- 📚 Parse BibTeX files for publications with automatic formatting
 - 📝 Generate LaTeX files using Mustache templates
 - 🔧 Compile LaTeX to PDF automatically
 - 🚀 Easy integration with GitHub Actions for automated CV generation
 - 🎨 Modern, professional template with clean typography and color accents
 - 🔄 Customizable templates for different CV styles
+- ✨ Author name abbreviation and highlighting in publications
+- 🛡️ Automatic LaTeX sanitization and HTML entity decoding
 
 ## Installation
 
@@ -34,15 +37,44 @@ add https://github.com/md-arif-shaikh/AcademicCV.jl
 
 ### 1. Organize Your Data
 
-Create a `_data` directory with YAML files for different aspects of your CV:
+Create a `_data` directory with YAML and BibTeX files for different aspects of your CV:
 
 ```
 _data/
-├── positions.yml
-├── education.yml
-├── publications.yml
-└── visits.yml
+├── authinfo.yaml         # Your personal information
+├── positions.yml         # Academic positions
+├── education.yml         # Educational background
+├── visits.yml           # Research visits
+├── short_author.bib     # Your publications (BibTeX)
+├── sxs.bib              # Collaboration publications (optional)
+└── lvk.bib              # Collaboration publications (optional)
 ```
+
+#### Personal Information (authinfo.yaml)
+
+Create an `authinfo.yaml` file with your personal details:
+
+```yaml
+name: Your Name
+email: your.email@example.edu
+website: https://yourwebsite.com
+position: Assistant Professor
+department: Department of Physics
+institute: Your University
+institute-address: City, State, Zip, Country
+phone: +1-234-567-8900
+introduction: |
+  Brief introduction about your research interests
+  and academic background.
+
+# Optional: Highlight your name in publication lists
+bib-highlights:
+  short_author: "Your Name"
+  sxs: "Your Name"
+  lvk: "Your Name"
+```
+
+#### YAML Data Files
 
 The package supports two YAML formats:
 
@@ -60,7 +92,7 @@ assistant_professor:
   to-month:
 ```
 
-**Format 2: List/Array structure** (recommended for publications):
+**Format 2: List/Array structure** (for simple lists):
 
 ```yaml
 - title: "Machine Learning for Scientific Discovery"
@@ -72,13 +104,46 @@ assistant_professor:
 
 Both formats work seamlessly with Mustache templates. Dictionary structures are automatically converted to lists for template iteration.
 
+#### BibTeX Files for Publications
+
+The package now supports BibTeX files (`.bib`) for publications, which is the **recommended approach** for managing publications:
+
+```bibtex
+@article{shaikh2024gw,
+  author = {Shaikh, Md Arif and Smith, John},
+  title = {Gravitational Wave Astronomy},
+  journal = {Physical Review D},
+  volume = {109},
+  number = {4},
+  year = {2024},
+  doi = {10.1103/PhysRevD.109.044001},
+  eprint = {2312.12345}
+}
+```
+
+**Features of BibTeX support:**
+- **Automatic author abbreviation**: Authors are automatically abbreviated (e.g., "Shaikh, M. A.")
+- **Name highlighting**: Your name can be automatically underlined in publication lists using `bib-highlights` in `authinfo.yaml`
+- **Multiple collections**: Group publications by category (e.g., `short_author.bib`, `sxs.bib`, `lvk.bib`)
+- **Smart formatting**: DOI and arXiv links are automatically converted to hyperlinks
+- **LaTeX sanitization**: Special characters are automatically escaped for LaTeX
+
+The BibTeX parser extracts fields like `author`, `title`, `journal`, `volume`, `number`, `year`, `doi`, `eprint`, and `booktitle`.
+
 ### 2. Create a LaTeX Template
 
-Create a template file using Mustache syntax:
+Create a template file using Mustache syntax. The package provides special features for publications:
 
 ```latex
 \documentclass{article}
 \begin{document}
+
+% Personal Information (from authinfo.yaml)
+{{#authinfo}}
+\centerline{\Large\bfseries {{name}}}
+\centerline{{{position}}}
+\centerline{{{email}} | {{website}}}
+{{/authinfo}}
 
 \section*{Positions}
 {{#positions}}
@@ -86,8 +151,30 @@ Create a template file using Mustache syntax:
 \textit{ {{institute}} } \hfill {{from-month}} {{from-year}} -- {{#to-year}}{{to-month}} {{to-year}}{{/to-year}}{{^to-year}}Present{{/to-year}}
 {{/positions}}
 
+% Publications from BibTeX files with reverse numbering
+\section*{Publications}
+{{#bib_collections}}
+\subsection*{ {{label}} }
+\setcounter{bibcount}{ {{entries_count}} }
+\begin{enumerate}
+{{#entries}}
+\item[\arabic{bibcount}.] {{author_abbr}} ``{{title}}.''
+{{#journal}}\textit{ {{journal}} }, {{/journal}}{{year}}.
+{{#doi}}\href{https://doi.org/{{doi}}}{ {{doi}} }{{/doi}}
+\addtocounter{bibcount}{-1}
+{{/entries}}
+\end{enumerate}
+{{/bib_collections}}
+
 \end{document}
 ```
+
+**New template features:**
+- `{{authinfo}}` - Access personal information from `authinfo.yaml`
+- `{{#bib_collections}}` - Iterate over BibTeX file collections
+- `{{entries_count}}` - Number of entries in each collection
+- `{{author_abbr}}` - Pre-formatted, abbreviated author list with optional highlighting
+- Reverse numbering support with LaTeX counters
 
 ### 3. Build Your CV
 
@@ -123,13 +210,49 @@ build_cv(data_dir, template_file, output_dir="./output";
 
 **Returns:** Path to the generated PDF file (if `compile=true`) or TeX file (if `compile=false`)
 
-### `load_data`
+### Data Processing Features
 
-Load all YAML files from a directory.
+The package includes several data processing features to make working with academic CVs easier:
+
+#### `load_data`
+
+Load all YAML and BibTeX files from a directory.
 
 ```julia
 data = load_data("_data")
 ```
+
+This function:
+- Loads all `.yml`, `.yaml`, and `.bib` files from the specified directory
+- Converts dictionary-based YAML to arrays for easier iteration
+- Parses BibTeX files into structured collections
+- Applies sanitization to escape LaTeX special characters
+- Generates `author_abbr` field for each publication entry
+- Creates `*_count` variables for each data collection (e.g., `positions_count`, `bib_collections_count`)
+
+#### BibTeX Processing
+
+When BibTeX files are present in the data directory, the package:
+
+1. **Parses BibTeX entries**: Extracts fields like `author`, `title`, `journal`, `volume`, `number`, `year`, `doi`, `eprint`, `booktitle`
+2. **Abbreviates author names**: "Md Arif Shaikh" becomes "Shaikh, M. A."
+3. **Highlights your name**: Uses `bib-highlights` from `authinfo.yaml` to underline your name in author lists
+4. **Sanitizes for LaTeX**: Escapes special characters while preserving URLs
+5. **Groups by collection**: Organizes publications by filename (e.g., `short_author.bib` → "Short author publications")
+6. **Provides counts**: Adds `entries_count` for each collection
+
+#### LaTeX Sanitization
+
+The `Formatting` module provides:
+- `escape_latex(s)`: Escapes special LaTeX characters (#, $, %, &, _, {, }, ~, ^, \)
+- `strip_tex(s)`: Removes LaTeX commands from strings (useful for cleaning BibTeX data)
+- `html_unescape(s)`: Converts HTML entities like `&amp;` and `&#x2013;` to regular characters
+- `sanitize(obj)`: Recursively processes data structures, applying appropriate sanitization to each field
+
+**Smart field handling**:
+- URLs and websites are HTML-unescaped but not LaTeX-escaped
+- DOI fields generate multiple variants: `doi`, `doi_url`, `doi_display`, `doi_full_url`
+- The `author_abbr` field is never re-escaped to preserve formatting
 
 ### `generate_latex`
 
@@ -190,10 +313,13 @@ jobs:
 ## Examples
 
 See the `examples/` directory for:
-- Sample YAML data files in `examples/_data/` matching the format from [md-arif-shaikh.github.io](https://github.com/md-arif-shaikh/md-arif-shaikh.github.io/tree/main/_data)
-- Example LaTeX template in `examples/templates/`
+- Sample YAML and BibTeX data files in `examples/_data/`:
+  - `authinfo.yaml` - Personal information with BibTeX highlighting configuration
+  - `positions.yml`, `education.yml`, `visits.yml` - Academic data
+  - `short_author.bib`, `sxs.bib`, `lvk.bib` - Publication collections in BibTeX format
+- Example LaTeX template in `examples/templates/` with modern styling
 - **[Example generated output](examples/output/cv.tex)** - View the LaTeX file produced from the sample data
-- Build scripts
+- Build scripts (`build_cv.jl` for full build, `build_cv_tex_only.jl` for TeX only)
 
 To run the example:
 
@@ -203,10 +329,11 @@ julia --project=.. build_cv.jl
 ```
 
 This will:
-1. Load YAML files from `_data/` directory
-2. Use the template from `templates/cv_template.tex`
-3. Generate a TeX file in `output/`
-4. Compile to PDF (if pdflatex is available)
+1. Load YAML and BibTeX files from `_data/` directory
+2. Parse and format publications with author abbreviation
+3. Use the template from `templates/cv_template.tex`
+4. Generate a TeX file in `output/`
+5. Compile to PDF (if pdflatex is available)
 
 ### Viewing the Output
 
@@ -253,13 +380,18 @@ When using GitHub Actions in your own repository, the generated PDF is also avai
 ```
 AcademicCV.jl/
 ├── src/
-│   └── AcademicCV.jl          # Main module
+│   ├── AcademicCV.jl          # Main module
+│   ├── BibTools.jl            # BibTeX parser
+│   └── Formatting.jl          # LaTeX sanitization & text formatting
 ├── examples/
-│   ├── _data/                 # Example YAML data
-│   │   ├── positions.yml
-│   │   ├── education.yml
-│   │   ├── publications.yml
-│   │   └── visits.yml
+│   ├── _data/                 # Example YAML and BibTeX data
+│   │   ├── authinfo.yaml      # Personal information
+│   │   ├── positions.yml      # Academic positions
+│   │   ├── education.yml      # Education
+│   │   ├── visits.yml         # Research visits
+│   │   ├── short_author.bib   # Individual publications
+│   │   ├── sxs.bib            # SXS collaboration
+│   │   └── lvk.bib            # LVK collaboration
 │   ├── templates/             # Example LaTeX templates
 │   │   └── cv_template.tex
 │   └── build_cv.jl           # Example build script
@@ -278,26 +410,110 @@ The package uses [Mustache templating](https://mustache.github.io/) for LaTeX ge
 
 ### Template Syntax
 
-- `{{variable}}` - Insert a variable
+- `{{variable}}` - Insert a variable (automatically LaTeX-escaped)
+- `{{&variable}}` - Insert a variable without escaping (use for pre-escaped content)
 - `{{#section}}...{{/section}}` - Loop over arrays or conditionally show content
 - `{{^section}}...{{/section}}` - Inverted section (shows if section is false/empty)
 
-### Example Template Snippet
+### Available Data Variables
+
+When you run `build_cv`, the following data is available in your template:
+
+**From authinfo.yaml**:
+- `authinfo` - Dictionary with `name`, `email`, `website`, `position`, `department`, `institute`, `introduction`, etc.
+
+**From YAML files**:
+- `positions` - Array of position entries (also: `positions_count`)
+- `education` - Array of education entries (also: `education_count`)
+- `visits` - Array of visit entries (also: `visits_count`)
+
+**From BibTeX files**:
+- `bib_collections` - Array of publication collections, each with:
+  - `id` - Collection identifier (e.g., "short_author", "sxs", "lvk")
+  - `label` - Human-readable label (e.g., "Short author publications")
+  - `entries` - Array of publication entries
+  - `entries_count` - Number of entries in this collection
+- `bib_collections_count` - Total number of collections
+
+**Each BibTeX entry includes**:
+- `author_abbr` - Pre-formatted, abbreviated author list (with optional highlighting)
+- `title`, `journal`, `volume`, `number`, `year`, `booktitle`, `eprint`
+- `doi`, `doi_url`, `doi_display`, `doi_full_url` (if DOI is present)
+
+### Example: Publications with BibTeX
 
 ```latex
 \section*{Publications}
+{{#bib_collections}}
+\subsection*{ {{label}} }
+\setcounter{bibcount}{ {{entries_count}} }
 \begin{enumerate}
-{{#publications}}
-\item {{authors}}. ``{{title}}.'' 
-{{#journal}}\textit{ {{journal}} }, {{/journal}}{{year}}.
-{{#doi}}DOI: \href{https://doi.org/{{doi}}}{ {{doi}} }{{/doi}}
-{{/publications}}
+{{#entries}}
+\item[\arabic{bibcount}.] {{&author_abbr}} ``{{title}}.''
+{{#journal}}\textit{ {{journal}} }{{/journal}}{{#volume}}, \textbf{ {{volume}} }{{/volume}}
+{{#number}}, \textit{ {{number}} }{{/number}}, {{year}}.
+{{#doi_full_url}}\href{ {{&doi_full_url}} }{ {{doi_display}} }{{/doi_full_url}}
+{{#eprint}}\href{https://arxiv.org/abs/{{&eprint}}}{arXiv:{{&eprint}}}{{/eprint}}
+\addtocounter{bibcount}{-1}
+{{/entries}}
 \end{enumerate}
+{{/bib_collections}}
 ```
 
-This will iterate over all publications in your `publications.yml` file and format them according to the template.
+**Note**: Use `{{&author_abbr}}` with `&` to prevent double-escaping since this field is already LaTeX-formatted.
 
-### Custom YAML Fields
+### Example: Personal Header
+
+```latex
+{{#authinfo}}
+{\centering
+{\Huge\bfseries {{name}}}\\[0.5em]
+{{#position}}{{position}}\\{{/position}}
+{{#department}}{{department}}{{#institute}}, {{institute}}{{/institute}}\\{{/department}}
+\vspace{0.5em}
+{{#introduction}}
+{{introduction}}
+\vspace{0.5em}
+{{/introduction}}
+{{#email}}\href{mailto:{{&email}}}{ {{email}} }{{/email}}
+{{#website}} | \href{ {{&website}} }{ {{website}} }{{/website}}
+\par
+}
+{{/authinfo}}
+```
+
+The included template (`examples/templates/cv_template.tex`) demonstrates advanced styling features:
+
+**Custom section headers** with decorative rules:
+```latex
+\newcommand{\CVSection}[1]{%
+    \par\vspace{1.5em}
+    \noindent\raisebox{0.25ex}{\rule{2cm}{3pt}}%
+    \hspace{0.5em}{\Large\bfseries {#1}}\par
+    \vspace{0.3em}
+}
+```
+
+**Indented content blocks**:
+```latex
+\newenvironment{CVContent}{%
+    \begin{list}{}{%
+        \setlength{\leftmargin}{1cm}
+        ...
+    }
+    \item[]
+}{%
+    \end{list}
+}
+```
+
+**Color schemes**:
+```latex
+\definecolor{headercolor}{RGB}{0, 51, 102}
+\definecolor{linkcolor}{RGB}{0, 102, 204}
+```
+
+### Custom Template Styling
 
 You can add any fields to your YAML files and reference them in the template. For example:
 
