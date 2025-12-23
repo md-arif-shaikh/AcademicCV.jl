@@ -69,7 +69,7 @@
 \setlist[enumerate]{leftmargin=*, itemsep=6pt, parsep=0pt}
 
 % Remove page numbers for a cleaner look
-\pagestyle{empty}
+<%#layout%><%#page_numbers%>\pagestyle{plain}<%/page_numbers%><%^page_numbers%>\pagestyle{empty}<%/page_numbers%><%/layout%>
 
 % Global counter for reverse-numbering bibliographies
 \newcounter{bibcount}
@@ -83,22 +83,32 @@
 % Modern CV Header (rendered from authinfo.yaml)
 <%#authinfo%>
 {\centering
-{\Huge\bfseries\color{headercolor} <%&name%>}\\[0.25em]
-{\large\color{headercolor} <%#position%><%&position%><%/position%>}\\
- \vspace{0.5em}
-{\small
-<%#introduction%>
-<%&introduction%>
-<%/introduction%>
-\vspace{0.5em}
-<%#email%>\href{\detokenize{mailto:<%&email%>}}{<%&email%>}<%/email%>
-<%#website%> \quad | \quad \href{\detokenize{<%&website%>}}{<%&website%>}<%/website%>
-<%#phone%> \quad | \quad <%&phone%><%/phone%>
+{\Huge\bfseries\color{headercolor} <%&name%>}\\[0.5em]
+\par
 }
+
+\noindent
+\begin{minipage}[t]{0.48\textwidth}
+\raggedright
+{\small
+<%#department%><%#department-website%>\href{\detokenize{<%&department-website%>}}{<%&department%>}<%/department-website%><%^department-website%><%&department%><%/department-website%>\\<%/department%>
+<%#institute%><%#institute-website%>\href{\detokenize{<%&institute-website%>}}{<%&institute%>}<%/institute-website%><%^institute-website%><%&institute%><%/institute-website%>\\<%/institute%>
+<%#institute-address%><%&institute-address%>\\<%/institute-address%>
+<%#address%><%&address%><%/address%>
+}
+\end{minipage}%
+\hfill
+\begin{minipage}[t]{0.48\textwidth}
+\raggedleft
+{\small
+<%#email%>\href{\detokenize{mailto:<%&email%>}}{<%&email%>}\\<%/email%>
+<%#website%>\href{\detokenize{<%&website%>}}{<%&website%>}<%/website%>
+}
+\end{minipage}
+
 \vspace{0.6em}
 \noindent\rule{\linewidth}{0.8pt}
 \par
-}
 <%/authinfo%>
 
 <%&cv_sections%>

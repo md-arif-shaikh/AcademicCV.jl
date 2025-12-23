@@ -5,6 +5,9 @@
 #   - enabled: true/false to include/exclude the section
 #   - title: display title for the section (optional, uses id if not specified)
 
+# Global options
+page_numbers: true
+
 sections:
   - id: positions
     enabled: true
