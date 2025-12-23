@@ -52,6 +52,65 @@ function load_data(data_dir::String)
     # `strip_tex` and other formatting helpers are provided by `Formatting.jl`.
     # AcademicCV uses those exported helpers via `using .Formatting` at the module top.
 
+    # Helper function to format date ranges intelligently
+    function format_date_range!(item::AbstractDict)
+        # Handle single date field (e.g., for seminars)
+        if haskey(item, "date") && !haskey(item, "from-month")
+            date_str = string(get(item, "date", ""))
+            # Parse ISO date format (YYYY-MM-DD)
+            if occursin(r"^\d{4}-\d{2}-\d{2}$", date_str)
+                parts = split(date_str, "-")
+                year = parts[1]
+                month_num = parse(Int, parts[2])
+                day = parse(Int, parts[3])
+                
+                months = ["January", "February", "March", "April", "May", "June", 
+                         "July", "August", "September", "October", "November", "December"]
+                month_name = months[month_num]
+                
+                item["date_range"] = "$month_name $day, $year"
+            else
+                item["date_range"] = date_str
+            end
+            return item
+        end
+        
+        if !haskey(item, "from-month") || !haskey(item, "to-month")
+            return item
+        end
+        
+        from_month = get(item, "from-month", "")
+        from_date = get(item, "from-date", "")
+        from_year = get(item, "from-year", "")
+        to_month = get(item, "to-month", "")
+        to_date = get(item, "to-date", "")
+        to_year = get(item, "to-year", "")
+        
+        # Convert to strings
+        from_month = string(from_month)
+        to_month = string(to_month)
+        from_year = string(from_year)
+        to_year = string(to_year)
+        from_date = string(from_date)
+        to_date = string(to_date)
+        
+        # Create formatted date range
+        if from_year == to_year
+            if from_month == to_month
+                # Same month and year: "Month day1-day2, year"
+                item["date_range"] = "$from_month $from_date--$to_date, $from_year"
+            else
+                # Different months, same year: "Month1 day1--Month2 day2, year"
+                item["date_range"] = "$from_month $from_date--$to_month $to_date, $from_year"
+            end
+        else
+            # Different years: "Month1 day1, year1--Month2 day2, year2"
+            item["date_range"] = "$from_month $from_date, $from_year--$to_month $to_date, $to_year"
+        end
+        
+        return item
+    end
+
     # YAML loading and sanitization handled in Formatting.jl
 
     # Load YAML files and normalize/sanitize
@@ -62,19 +121,29 @@ function load_data(data_dir::String)
         yaml_content = normalize(yaml_content)
         yaml_content = sanitize(yaml_content)
 
-        if isa(yaml_content, AbstractDict) && !isempty(yaml_content)
+        if isa(yaml_content, AbstractVector)
+            # It's already an array of items
+            data[key] = yaml_content
+            # Apply date range formatting to each item
+            for item in data[key]
+                if isa(item, AbstractDict)
+                    format_date_range!(item)
+                end
+            end
+            data[string(key, "_count")] = length(data[key])
+        elseif isa(yaml_content, AbstractDict) && !isempty(yaml_content)
             if all(v -> isa(v, AbstractDict), values(yaml_content))
                 data[key] = [v for (k, v) in yaml_content]
+                # Apply date range formatting to each item
+                for item in data[key]
+                    format_date_range!(item)
+                end
                 data[string(key, "_count")] = length(data[key])
             else
                 data[key] = yaml_content
             end
         else
             data[key] = yaml_content
-        end
-
-        if isa(data[key], AbstractVector)
-            data[string(key, "_count")] = length(data[key])
         end
     end
 

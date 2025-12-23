@@ -1,0 +1,349 @@
+Future-GW-icts-2025:
+  conference: The Future of Gravitational-Wave Astronomy
+  conference-url:
+  institute: ICTS
+  institute-url: https://www.icts.res.in/
+  city: Bangalore
+  country: India
+  from-date: 27
+  from-month: October
+  from-year: 2025
+  to-date: 31
+  to-month: October
+  to-year: 2025
+
+gwuniverse2024October:
+  conference: Cosmology in Multi-Messenger Era
+  conference-url:
+  institute: Gravitational Wave Universe, SNU
+  institute-url: https://gwuniverse.snu.ac.kr/
+  city: Seoul
+  country: Korea
+  from-date: 14
+  from-month: October
+  from-year: 2024
+  to-date: 14
+  to-month: October
+  to-year: 2024
+  
+KAS2023October:
+  conference: KAS 2023 Fall Meeting
+  conference-url: http://www.kas.org/
+  institute: Korean Astronomical Society
+  institute-url: http://www.kas.org/
+  city: RABADA PLAZA, JEJU
+  country: Korea
+  from-date: 18
+  from-month: October
+  from-year: 2023
+  to-date: 20
+  to-month: October
+  to-year: 2023
+  
+LVK2023September:
+  conference: LVK 2023 September Meeting
+  conference-url: https://www.resceu.s.u-tokyo.ac.jp/symposium/LVK2023toyama/index.php
+  institute: LVK Collaboration
+  institute-url:
+  city: Toyama
+  country: Japan
+  from-date: 11
+  from-month: September
+  from-year: 2023
+  to-date: 15
+  to-month: September
+  to-year: 2023
+
+gwuniverse7-2023:
+  conference: GW Universe Workshop 7
+  conference-url:
+  institute: Gravitational Wave Universe
+  institute-url: https://gwuniverse.snu.ac.kr/
+  city: Seoul
+  country: Korea
+  from-date: 12
+  from-month: June
+  from-year: 2023
+  to-date: 12
+  to-month: June
+  to-year: 2023
+
+KAS2023April:
+  conference: KAS 2023 Spring Meeting
+  conference-url: http://www.kas.org/
+  institute: Korean Astronomical Society
+  institute-url: http://www.kas.org/
+  city: LAHANHOTEL, JEONJU
+  country: Korea
+  from-date: 12
+  from-month: April
+  from-year: 2023
+  to-date: 14
+  to-month: April
+  to-year: 2023
+  
+LVK2023March:
+  conference: LVK 2023 March Meeting
+  conference-url: https://sites.northwestern.edu/lvk2023ciera/
+  institute: Center for Interdisciplinary Exploration and Research in Astrophysics (CIERA)
+  institute-url: https://ciera.northwestern.edu/
+  city: (remote participation), Evanston
+  country: USA
+  from-date: 13
+  from-month: March
+  from-year: 2023
+  to-date: 16
+  to-month: March
+  to-year: 2023
+
+gwnr-workshop-68:
+  conference:  68th Workshop on Gravitational Waves and Numerical Relativity
+  conference-url: https://gw.nr.re.kr/workshop/68/
+  institute: APCTP
+  institute-url: https://www.apctp.org/
+  city: Pohang
+  country: Korea
+  from-date: 15
+  from-month: March
+  from-year: 2023
+  to-date: 16
+  to-month: March
+  to-year: 2023
+
+gwuniverse-winter-workshop-2023:
+  conference: GW Universe Winter Workshop 2023
+  conference-url:
+  institute: Gravitational Wave Universe
+  institute-url: https://gwuniverse.snu.ac.kr/
+  city: Yongpyong Ski Resort, Gwangwon
+  country: Korea
+  from-date: 26
+  from-month: February
+  from-year: 2023
+  to-date: 01
+  to-month: March
+  to-year: 2023
+
+gwuniverse-2022:
+  conference: GW Universe Workshop6
+  conference-url: https://gwuniverse.snu.ac.kr/events/conferences/19
+  institute: Gravitational Wave Universe
+  institute-url: https://gwuniverse.snu.ac.kr/
+  city: Seoul
+  country: Korea
+  from-date: 24
+  from-month: November
+  from-year: 2022
+  to-date: 25
+  to-month: November
+  to-year: 2022
+  
+gwnr-workshop-67:
+  conference:  67th Workshop on Gravitational Waves and Numerical Relativity
+  conference-url: https://gw.nr.re.kr/workshop/67/
+  institute: APCTP
+  institute-url: https://www.apctp.org/
+  city: Pohang
+  country: Korea
+  from-date: 26
+  from-month: October
+  from-year: 2022
+  to-date: 27
+  to-month: October
+  to-year: 2022
+
+Summer-school-icts-2021:
+  conference: Summer School on Gravitational-Wave Astronomy
+  conference-url: https://www.icts.res.in/program/gws2021
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/
+  city: Bangalore
+  country: India
+  from-date: 5
+  from-month: July
+  from-year: 2021
+  to-date: 16
+  to-month: July
+  to-year: 2021
+
+icerm-2020:
+  conference: "ICERM Fall 2020 Workshop 1: Advances and Challenges in Computational Relativity"
+  conference-url: https://icerm.brown.edu/programs/sp-f20/w1/
+  institute: ICERM, Brown University
+  institute-url: https://icerm.brown.edu/
+  city: Online
+  country: USA
+  from-date: 14
+  from-month: September
+  from-year: 2020
+  to-date: 18
+  to-month: September
+  to-year: 2020
+
+icts-bilby-2020:
+  conference: ICTS workshop on parameter estimation with bilby
+  conference-url: https://github.com/GregoryAshton/GWParameterEstimationWorkshop2020/
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/
+  city: Bangalore
+  country: India
+  from-date: 27
+  from-month: August
+  from-year: 2020
+  to-date: 28
+  to-month: August
+  to-year: 2020
+
+tgr-iacs-2020:
+  conference: Test of General Relativity using Gravitational Waves
+  conference-url: https://events.iitgn.ac.in/2020/TGRGW/
+  institute: IACS, Kolkata \& IIT Gandhinagar
+  institute-url: https://events.iitgn.ac.in/2020/TGRGW/
+  city: Online
+  country: India
+  from-date: 13
+  from-month: August
+  from-year: 2020
+  to-date: 14
+  to-month: August
+  to-year: 2020
+
+pycbc-2020:
+  conference: PyCBC Inference Online Workshop 2020
+  conference-url: https://github.com/gwastro/PyCBCInferenceOnlineWorkshop2020
+  institute: AEI, Hannover
+  institute-url: https://github.com/gwastro/PyCBCInferenceOnlineWorkshop2020
+  city: Online
+  country: Germany
+  from-date: 25
+  from-month: June
+  from-year: 2020
+  to-date: 26
+  to-month: June
+  to-year: 2020
+
+GWODW-3:
+  conference: Gravitational-Wave Open Data Workshop \#3
+  conference-url: https://www.gw-openscience.org/static/workshop3/
+  institute: LIGO-Virgo Collaboration
+  institute-url: 
+  city: Online
+  country: USA
+  from-date: 26
+  from-month: May
+  from-year: 2020
+  to-date: 28
+  to-month: May
+  to-year: 2020
+
+icts-summer-school-2020:
+  conference: Summer School on Gravitational-Wave Astronomy
+  conference-url: https://www.icts.res.in/program/gws2020
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/
+  city: Online
+  country: India
+  from-date: 18
+  from-month: May
+  from-year: 2020
+  to-date: 23
+  to-month: May
+  to-year: 2020
+
+astrophysics-massive-bh:
+  conference: Astrophysics of Supermassive Black Holes
+  conference-url: https://www.icts.res.in/discussion-meeting/smbh2019
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/
+  city: Bangalore
+  country: India
+  from-date: 17
+  from-month: December
+  from-year: 2019
+  to-date: 19
+  to-month: December
+  to-year: 2019
+
+Newton-Bhabha-iucaa-2019:
+  conference: Newton Bhabha-Open Data workshop
+  conference-url: https://www.gw.iucaa.in/newtonbhabha-opendata/
+  institute: IUCAA
+  institute-url: https://www.gw.iucaa.in/
+  city: Pune
+  country: India
+  from-date: 4
+  from-month: December
+  from-year: 2019
+  to-date: 6
+  to-month: December
+  to-year: 2019
+
+Future-GW-icts-2019:
+  conference: The Future of Gravitational-Wave Astronomy
+  conference-url:
+  institute: ICTS
+  institute-url: https://www.icts.res.in/
+  city: Bangalore
+  country: India
+  from-date: 19
+  from-month: August
+  from-year: 2019
+  to-date: 22
+  to-month: August
+  to-year: 2019
+
+icts-summer-school-2019:
+  conference: Summer School on Gravitational-Wave Astronomy
+  conference-url: https://www.icts.res.in/program/gws2019
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/
+  city: Bangalore
+  country: India
+  from-date: 25
+  from-month: July
+  from-year: 2019
+  to-date: 26
+  to-month: July
+  to-year: 2019
+
+ggi-2019:
+  conference: Theoretical Aspects of Astroparticle Physics, Cosmology and Gravitation
+  conference-url: https://agenda.infn.it/event/17246/
+  institute: Galileo Galilei Institute for Theoretical Physics
+  institute-url: https://www.ggi.infn.it/
+  city: Florence
+  country: Italy
+  from-date: 11
+  from-month: March
+  from-year: 2019
+  to-date: 22
+  to-month: March
+  to-year: 2019
+
+bbh-workshop-iitgn-2017:
+  conference: "Black Holes: From Classical to Quantum Gravity"
+  conference-url: https://events.iitgn.ac.in/2017/blackholes/index.php
+  institute: IIT
+  institute-url: https://iitgn.ac.in/
+  city: Gandhinagar
+  country: India
+  from-date: 15
+  from-month: December
+  from-year: 2017
+  to-date: 19
+  to-month: December
+  to-year: 2017
+
+icts-summer-school-2017:
+  conference: Summer School on Gravitational-Wave Astronomy
+  conference-url: https://www.icts.res.in/program/gws2017
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/
+  city: Bangalore
+  country: India
+  from-date: 17
+  from-month: July
+  from-year: 2017
+  to-date: 28
+  to-month: July
+  to-year: 2017

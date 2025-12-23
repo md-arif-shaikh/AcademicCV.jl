@@ -1,0 +1,128 @@
+ICTS-2025-August:
+  title: "Defining eccentricity for spin-precessing binaries"
+  date: 2025-08-07
+  talk-url: "https://www.icts.res.in/seminar/2025-08-07/md-arif-shaikh"
+  institute: ICTS
+  institute-url: https://www.icts.res.in/ 
+  city: Bangalore
+  country: India
+
+IUCAA-2025-June:
+  title: "Defining eccentricity for spin-precessing binaries"
+  date: 2025-06-18
+  talk-url:
+  institute: IUCAA
+  institute-url: https://www.iucaa.in/en/
+  city: Pune
+  country: India
+
+Inje-November-2023:
+  title: "gw_eccentricity: a Python package to measure orbital eccentricity from gravitational
+waveforms"
+  date: 2023-11-03
+  talk-url:
+  institute: Inje University
+  institute-url: https://www.inje.ac.kr/english/
+  city: Gimhae
+  country: Korea
+
+IUCAA-2023-June:
+  title: "gw_eccentricity: a Python package to measure orbital eccentricity from gravitational
+waveforms"
+  date: 2023-06-19
+  talk-url:
+  institute: IUCAA
+  institute-url: https://www.iucaa.in/en/
+  city: Pune
+  country: India
+  
+ICTS-TIFR-2023-June:
+  title: "gw_eccentricity: a Python package to measure orbital eccentricity from gravitational
+waveforms"
+  date: 2023-06-15
+  talk-url: https://www.icts.res.in/seminar/2023-06-15/md-arif-shaikh
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/ 
+  city: Bangalore
+  country: India
+
+ITP-May-2023:
+  title: Measuring Eccentricity from Gravitational Waveform
+  date: 2023-05-11
+  talk-url: http://english.itp.cas.cn/activities/Talks/202305/t20230505_330291.html
+  institute: ITP
+  institute-url: http://english.itp.cas.cn/
+  city: Beijing
+  country: China
+  
+BNU-May-2023:
+  title: Measuring Eccentricity from Gravitational Waveform
+  date: 2023-05-10
+  talk-url: 
+  institute: BNU
+  institute-url: https://english.bnu.edu.cn/
+  city: Beijing
+  country: China
+
+KASI-April-2023:
+  title: Defining eccentricity for gravitational wave astronomy
+  date: 2023-04-20
+  talk-url: 
+  institute: KASI
+  institute-url: https://www.kasi.re.kr/eng/index
+  city: Daejeon
+  country: Korea
+  
+IBS-April-2023:
+  title: Standardizing the definition of eccentricity for gravitational wave astronomy
+  date: 2023-04-18
+  talk-url: 
+  institute: IBS
+  institute-url: https://www.ibs.re.kr/eng.do
+  city: Daejeon
+  country: Korea
+
+ICTS-TIFR-2022:
+  title: Defining eccentricity for gravitational wave astronomy
+  date: 2022-12-01
+  talk-url: https://www.icts.res.in/seminar/2022-12-01/md-arif-shaikh
+  institute: ICTS-TIFR
+  institute-url: https://www.icts.res.in/ 
+  city: Bangalore (online)
+  country: India
+
+RESCEU-Tokyo-2022:
+  title: Defining eccentricity for gravitational wave astronomy
+  date: 2022-11-18
+  talk-url:
+  institute: RESCEU
+  institute-url: https://www.resceu.s.u-tokyo.ac.jp/top.php
+  city: Tokyo
+  country: Japan
+  
+OIT-Osaka-2022:
+  title: Defining eccentricity for gravitational wave astronomy
+  date: 2022-11-16
+  talk-url: https://www.oit.ac.jp/ge/~nozawa/OITGravitySeminar/
+  institute: OIT
+  institute-url: https://www.oit.ac.jp/english/index.html
+  city: Osaka
+  country: Japan
+
+YITP-Kyoto-2022:
+  title: Defining eccentricity for gravitational wave astronomy
+  date: 2022-11-14
+  talk-url: https://www.yukawa.kyoto-u.ac.jp/seminar/s53052?lang=en-GB
+  institute: YITP
+  institute-url: https://www.yukawa.kyoto-u.ac.jp/en-GB/
+  city: Kyoto
+  country: Japan
+
+HRI-Allahabad-2019:
+  title: On the emergent sonic geometry through the linear perturbation of relativistic black hole accretion
+  date: 2019-11-18
+  talk-url:
+  institute: HRI
+  institute-url: https://www.hri.res.in  
+  city: Allahabad
+  country: India

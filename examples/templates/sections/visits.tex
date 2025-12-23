@@ -3,7 +3,7 @@
 \setcounter{visitcount}{ {{visits_count}} }
 \begin{enumerate}
 {{#visits}}
-\item[\arabic{visitcount}.] {{#host-url}}\href{ {{&host-url}} }{ {{host}} }{{/host-url}}{{^host-url}}{{host}}{{/host-url}}, {{#institute-website}}\href{ {{&institute-website}} }{ {{institute}} }{{/institute-website}}{{#institute-url}}\href{ {{&institute-url}} }{ {{institute}} }{{/institute-url}}{{^institute-website}}{{^institute-url}}{{institute}}{{/institute-url}}{{/institute-website}}, {{city}}, {{country}}, {{from-month}} {{from-date}}, {{from-year}} -- {{to-month}} {{to-date}}, {{to-year}} \addtocounter{visitcount}{-1}
+\item[\arabic{visitcount}.] {{#host-url}}\href{ {{&host-url}} }{ {{host}} }{{/host-url}}{{^host-url}}{{host}}{{/host-url}}, {{#institute-website}}\href{ {{&institute-website}} }{ {{institute}} }{{/institute-website}}{{#institute-url}}\href{ {{&institute-url}} }{ {{institute}} }{{/institute-url}}{{^institute-website}}{{^institute-url}}{{institute}}{{/institute-url}}{{/institute-website}}, {{city}}, {{country}}, {{&date_range}} \addtocounter{visitcount}{-1}
 {{/visits}}
 \end{enumerate}
 \end{CVContent}

@@ -161,7 +161,12 @@ function sanitize(obj)
             
             if isa(v, String)
                 if key_str == "author_abbr"
+                    # Don't escape - author abbreviations are pre-formatted
                     out[k] = v
+                elseif key_str == "conference" || key_str == "title"
+                    # Escape special characters but preserve already-escaped LaTeX commands
+                    # Only escape underscores, the rest should be handled properly
+                    out[k] = replace(v, "_" => raw"\_")
                 elseif occursin("website", key_str) || occursin("url", key_str) || key_str == "website"
                     out[k] = html_unescape(v)
                 elseif key_str == "doi"

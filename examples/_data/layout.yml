@@ -22,6 +22,22 @@ sections:
     enabled: true
     title: Research Visits
   
+  - id: seminars
+    enabled: true
+    title: Seminars
+  
+  - id: workshops
+    enabled: true
+    title: Workshops
+  
+  - id: conference-talks
+    enabled: true
+    title: Conference Talks
+  
+  - id: conference-posters
+    enabled: true
+    title: Conference Posters
+  
   - id: references
     enabled: true
     title: References
