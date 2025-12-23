@@ -40,7 +40,7 @@ jobs:
       
       - name: Build CV
         run: |
-          julia --project=. examples/build_cv_with_layout.jl
+          julia --project=. examples/build_cv.jl
       
       - name: Upload CV PDF as artifact
         uses: actions/upload-artifact@v4

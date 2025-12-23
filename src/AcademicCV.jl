@@ -7,7 +7,7 @@ using OrderedCollections
 # load helper modules
 include("Formatting.jl")
 include("BibTools.jl")
-using .Formatting: escape_latex, strip_tex, abbreviate_name, build_author_abbr, html_unescape, sanitize
+using .Formatting: escape_latex, strip_tex, abbreviate_name, build_author_abbr, html_unescape, sanitize, format_date_range!
 using .BibTools: parse_bib_file
 
 export build_cv, load_data, generate_latex, compile_pdf, build_cv_with_layout, build_cv_from_data
@@ -49,107 +49,10 @@ function load_data(data_dir::String)
         end
     end
 
-    # `strip_tex` and other formatting helpers are provided by `Formatting.jl`.
-    # AcademicCV uses those exported helpers via `using .Formatting` at the module top.
+    # Helper functions are provided by `Formatting.jl` module
+    # (escape_latex, strip_tex, abbreviate_name, format_date_range!, etc.)
 
-    # Helper function to format date ranges intelligently
-    function format_date_range!(item::AbstractDict)
-        # Handle ISO date range with from/to fields (e.g., for teaching)
-        if haskey(item, "from") && haskey(item, "to") && !haskey(item, "from-month")
-            from_str = string(get(item, "from", ""))
-            to_str = string(get(item, "to", ""))
-            
-            # Parse ISO dates
-            if occursin(r"^\d{4}-\d{2}-\d{2}$", from_str) && occursin(r"^\d{4}-\d{2}-\d{2}$", to_str)
-                from_parts = split(from_str, "-")
-                to_parts = split(to_str, "-")
-                
-                from_year = from_parts[1]
-                from_month_num = parse(Int, from_parts[2])
-                from_day = parse(Int, from_parts[3])
-                
-                to_year = to_parts[1]
-                to_month_num = parse(Int, to_parts[2])
-                to_day = parse(Int, to_parts[3])
-                
-                months = ["January", "February", "March", "April", "May", "June", 
-                         "July", "August", "September", "October", "November", "December"]
-                
-                from_month = months[from_month_num]
-                to_month = months[to_month_num]
-                
-                # Format based on same/different month and year
-                if from_year == to_year
-                    if from_month == to_month
-                        item["date_range"] = "$from_month $from_day--$to_day, $from_year"
-                    else
-                        item["date_range"] = "$from_month $from_day--$to_month $to_day, $from_year"
-                    end
-                else
-                    item["date_range"] = "$from_month $from_day, $from_year--$to_month $to_day, $to_year"
-                end
-            end
-            return item
-        end
-        
-        # Handle single date field (e.g., for seminars)
-        if haskey(item, "date") && !haskey(item, "from-month")
-            date_str = string(get(item, "date", ""))
-            # Parse ISO date format (YYYY-MM-DD)
-            if occursin(r"^\d{4}-\d{2}-\d{2}$", date_str)
-                parts = split(date_str, "-")
-                year = parts[1]
-                month_num = parse(Int, parts[2])
-                day = parse(Int, parts[3])
-                
-                months = ["January", "February", "March", "April", "May", "June", 
-                         "July", "August", "September", "October", "November", "December"]
-                month_name = months[month_num]
-                
-                item["date_range"] = "$month_name $day, $year"
-            else
-                item["date_range"] = date_str
-            end
-            return item
-        end
-        
-        if !haskey(item, "from-month") || !haskey(item, "to-month")
-            return item
-        end
-        
-        from_month = get(item, "from-month", "")
-        from_date = get(item, "from-date", "")
-        from_year = get(item, "from-year", "")
-        to_month = get(item, "to-month", "")
-        to_date = get(item, "to-date", "")
-        to_year = get(item, "to-year", "")
-        
-        # Convert to strings
-        from_month = string(from_month)
-        to_month = string(to_month)
-        from_year = string(from_year)
-        to_year = string(to_year)
-        from_date = string(from_date)
-        to_date = string(to_date)
-        
-        # Create formatted date range
-        if from_year == to_year
-            if from_month == to_month
-                # Same month and year: "Month day1-day2, year"
-                item["date_range"] = "$from_month $from_date--$to_date, $from_year"
-            else
-                # Different months, same year: "Month1 day1--Month2 day2, year"
-                item["date_range"] = "$from_month $from_date--$to_month $to_date, $from_year"
-            end
-        else
-            # Different years: "Month1 day1, year1--Month2 day2, year2"
-            item["date_range"] = "$from_month $from_date, $from_year--$to_month $to_date, $to_year"
-        end
-        
-        return item
-    end
-
-    # YAML loading and sanitization handled in Formatting.jl
+    # YAML loading and sanitization
 
     # Load YAML files and normalize/sanitize
     for file in yaml_files
