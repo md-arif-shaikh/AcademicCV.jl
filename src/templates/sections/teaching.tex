@@ -1,7 +1,7 @@
 \begin{CVContent}
 \begin{itemize}[leftmargin=*]
 {{#teaching}}
-\item \textbf{ {{&course}} } ({{&role}}){{#instructor}}, Instructor: {{#instructor.website}}\href{ {{&instructor.website}} }{ {{&instructor.name}} }{{/instructor.website}}{{^instructor.website}}{{&instructor.name}}{{/instructor.website}}{{/instructor}}
+\item \textbf{ {{&course}} } ({{&role}}){{#instructor}}, Instructor: {{#website}}\href{ {{&website}} }{ {{&name}} }{{/website}}{{^website}}{{&name}}{{/website}}{{/instructor}}
 \\{{#school-website}}\href{ {{&school-website}} }{ {{&school}} }{{/school-website}}{{^school-website}}{{&school}}{{/school-website}}, \href{ {{&institute-website}} }{ {{&institute}} }, {{&city}}, {{&country}}
 \\{{&date_range}}
 {{/teaching}}
