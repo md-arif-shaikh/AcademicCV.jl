@@ -18,6 +18,13 @@
 /examples/output/*
 !.gitkeep
 
+# Test and temporary output directories
+test_output/
+my_cv_output/
+custom_output/
+output/
+temp_data/
+
 # OS
 .DS_Store
 Thumbs.db

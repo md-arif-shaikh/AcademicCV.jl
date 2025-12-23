@@ -1,0 +1,8 @@
+\setcounter{confpostercount}{ {{conference-posters_count}} }
+\begin{CVContent}
+\begin{enumerate}[label=\arabic{confpostercount}., leftmargin=*]
+{{#conference-posters}}
+\item[\arabic{confpostercount}.] {{#url}}\href{ {{&url}} }{``{{&title}}''}{{/url}}{{^url}}``{{&title}}''{{/url}}, {{#conference-url}}\href{ {{&conference-url}} }{ {{&conference}} }{{/conference-url}}{{^conference-url}}{{&conference}}{{/conference-url}}, {{&city}}, {{&country}}, {{&date_range}} \addtocounter{confpostercount}{-1}
+{{/conference-posters}}
+\end{enumerate}
+\end{CVContent}

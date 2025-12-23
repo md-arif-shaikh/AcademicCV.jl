@@ -10,7 +10,7 @@ include("BibTools.jl")
 using .Formatting: escape_latex, strip_tex, abbreviate_name, build_author_abbr, html_unescape, sanitize
 using .BibTools: parse_bib_file
 
-export build_cv, load_data, generate_latex, compile_pdf, build_cv_with_layout
+export build_cv, load_data, generate_latex, compile_pdf, build_cv_with_layout, build_cv_from_data
 
 """
     load_data(data_dir::String)
@@ -155,20 +155,28 @@ function load_data(data_dir::String)
     for file in yaml_files
         filepath = joinpath(data_dir, file)
         key = replace(file, r"\.(yml|yaml)$" => "")
-        yaml_content = YAML.load_file(filepath; dicttype=OrderedDict)
+        try
+            yaml_content = YAML.load_file(filepath; dicttype=OrderedDict)
+        catch e
+            if isa(e, ArgumentError) && occursin("invalid base", e.msg)
+                error("YAML parsing error in file '$file': Numbers starting with '0' are treated as octal. Please quote such values (e.g., phone numbers) in your YAML file. Original error: $(e.msg)")
+            else
+                rethrow(e)
+            end
+        end
         yaml_content = normalize(yaml_content)
         
         # Add is_plural flag before sanitization for items with number field
         if isa(yaml_content, AbstractDict) && !isempty(yaml_content)
             for (k, v) in yaml_content
                 if isa(v, AbstractDict) && haskey(v, "number")
-                    v["is_plural"] = (v["number"] > 1)
+                    v["is_plural"] = (parse(Int, string(v["number"])) > 1)
                 end
             end
         elseif isa(yaml_content, AbstractVector)
             for item in yaml_content
                 if isa(item, AbstractDict) && haskey(item, "number")
-                    item["is_plural"] = (item["number"] > 1)
+                    item["is_plural"] = (parse(Int, string(item["number"])) > 1)
                 end
             end
         end
@@ -543,6 +551,58 @@ function build_cv_with_layout(data_dir::String, sections_dir::String, base_templ
     else
         return tex_output
     end
+end
+
+"""
+    build_cv_from_data(data_dir::String; output_dir::String="./output", 
+                       tex_filename::String="cv.tex", compile::Bool=true, 
+                       engine::String="pdflatex")
+
+Build a CV using the bundled templates that come with AcademicCV package.
+This is the recommended way to use the package from other projects.
+
+# Arguments
+- `data_dir::String`: Path to directory containing your YAML data files and layout.yml
+- `output_dir::String`: Path where the output will be saved (default: "./output")
+- `tex_filename::String`: Name of the TeX file to generate (default: "cv.tex")
+- `compile::Bool`: Whether to compile the LaTeX to PDF (default: true)
+- `engine::String`: LaTeX engine to use for compilation (default: "pdflatex")
+
+# Returns
+- Path to the generated PDF file (if compile=true) or TeX file (if compile=false)
+
+# Example
+```julia
+using AcademicCV
+
+# Assumes you have a data directory with YAML files and layout.yml
+pdf_file = build_cv_from_data("path/to/my_cv_data")
+```
+"""
+function build_cv_from_data(data_dir::String; output_dir::String="./output", 
+                            tex_filename::String="cv.tex", compile::Bool=true, 
+                            engine::String="pdflatex")
+    # Get the package directory where bundled templates are located
+    package_dir = pkgdir(@__MODULE__)
+    bundled_sections_dir = joinpath(package_dir, "src", "templates", "sections")
+    bundled_base_template = joinpath(package_dir, "src", "templates", "cv_template_base.tex")
+    
+    # Verify bundled templates exist
+    if !isdir(bundled_sections_dir)
+        error("Bundled section templates not found at: $bundled_sections_dir")
+    end
+    if !isfile(bundled_base_template)
+        error("Bundled base template not found at: $bundled_base_template")
+    end
+    
+    println("Using bundled templates from AcademicCV package")
+    println("Section templates: $bundled_sections_dir")
+    println("Base template: $bundled_base_template")
+    
+    # Use the standard build function with bundled templates
+    return build_cv_with_layout(data_dir, bundled_sections_dir, bundled_base_template, 
+                                output_dir; tex_filename=tex_filename, compile=compile, 
+                                engine=engine)
 end
 
 end # module AcademicCV

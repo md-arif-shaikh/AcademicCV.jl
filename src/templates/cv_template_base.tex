@@ -1,0 +1,106 @@
+\documentclass[11pt,a4paper]{article}
+{{=<% %>=}}
+
+% Modern packages for better typography and layout
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{palatino} % Palatino font for better readability
+\usepackage[margin=0.75in]{geometry}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{hyperref}
+
+% Define colors for a modern look
+\definecolor{headercolor}{RGB}{0, 51, 102}
+\definecolor{linkcolor}{RGB}{0, 102, 204}
+
+% Configure hyperref
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkcolor,
+    urlcolor=linkcolor,
+    citecolor=linkcolor
+}
+
+% Customize section formatting
+% --- CUSTOM DEFINITIONS ---
+
+% 1. The Section Header
+% \rule{width}{thickness} -> We use \linewidth and 2pt thickness
+\newcommand{\CVSection}[1]{%
+    \par\vspace{1.5em} % Spacing before new section
+    \noindent
+    % \raisebox{lift_amount}{\rule{width}{thickness}}
+    % We lift it 0.25ex so it looks centered next to the font
+    \raisebox{0.25ex}{\rule{2cm}{3pt}}%
+    \hspace{0.5em}% Space between rule and text
+    {\Large\bfseries {#1}}\par
+    \vspace{0.3em} % Spacing after title
+}
+
+% 2. The Indented Environment
+% This acts like a tab stop for the whole block of text
+\newenvironment{CVContent}{%
+    \begin{list}{}{%
+        \setlength{\leftmargin}{1cm} % <--- CONTROL INDENTATION HERE
+        \setlength{\parsep}{0pt}
+        \setlength{\topsep}{0pt}
+        \setlength{\partopsep}{0pt}
+    }
+    \item[] % Empty item to start the text
+}{%
+    \end{list}
+}
+
+% --- END DEFINITIONS ---
+
+\titleformat{\subsection}
+  {\large\bfseries}
+  {}
+  {0em}
+  {}
+
+% Reduce spacing
+\titlespacing*{\section}{0pt}{12pt plus 4pt minus 2pt}{6pt plus 2pt minus 2pt}
+\titlespacing*{\subsection}{0pt}{8pt plus 3pt minus 2pt}{4pt plus 1pt minus 1pt}
+
+% Configure enumerate
+\setlist[enumerate]{leftmargin=*, itemsep=6pt, parsep=0pt}
+
+% Remove page numbers for a cleaner look
+\pagestyle{empty}
+
+% Global counter for reverse-numbering bibliographies
+\newcounter{bibcount}
+\newcounter{seminarcount}
+\newcounter{workshopcount}
+\newcounter{conftalkcount}
+\newcounter{confpostercount}
+
+\begin{document}
+
+% Modern CV Header (rendered from authinfo.yaml)
+<%#authinfo%>
+{\centering
+{\Huge\bfseries\color{headercolor} <%&name%>}\\[0.25em]
+{\large\color{headercolor} <%#position%><%&position%><%/position%>}\\
+ \vspace{0.5em}
+{\small
+<%#introduction%>
+<%&introduction%>
+<%/introduction%>
+\vspace{0.5em}
+<%#email%>\href{\detokenize{mailto:<%&email%>}}{<%&email%>}<%/email%>
+<%#website%> \quad | \quad \href{\detokenize{<%&website%>}}{<%&website%>}<%/website%>
+<%#phone%> \quad | \quad <%&phone%><%/phone%>
+}
+\vspace{0.6em}
+\noindent\rule{\linewidth}{0.8pt}
+\par
+}
+<%/authinfo%>
+
+<%&cv_sections%>
+
+\end{document}

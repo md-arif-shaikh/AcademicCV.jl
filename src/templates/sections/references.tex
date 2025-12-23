@@ -1,0 +1,10 @@
+{{#references}}
+\begin{CVContent}
+{\bfseries {{&name}}}{{#relation}} ({{&relation}}){{/relation}}\\
+{{#position}}{\itshape {{&position}}}{{/position}}{{#position}}{{#institute}}, {{/institute}}{{/position}}{{#institute}}{{#institute-website}}\href{ {{&institute-website}} }{ {{&institute}} }{{/institute-website}}{{^institute-website}}{{&institute}}{{/institute-website}}\\{{/institute}}
+{{#institute-address}}{{&institute-address}}\\{{/institute-address}}
+{{#email}}Email: {{&email}}{{/email}}{{#phone}}{{#email}}, {{/email}}Phone: {{&phone}}{{/phone}}{{#website}}{{#email}}{{^phone}}, {{/phone}}{{/email}}{{#phone}}, {{/phone}}Website: \href{ {{&website}} }{ {{&website}} }{{/website}}
+
+\vspace{0.5em}
+\end{CVContent}
+{{/references}}

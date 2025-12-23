@@ -37,16 +37,25 @@ add https://github.com/md-arif-shaikh/AcademicCV.jl
 
 ## Quick Start
 
+The simplest way to use AcademicCV.jl is with the `build_cv_from_data` function, which uses bundled templates - **no need to copy or manage LaTeX template files!**
+
 ### 1. Organize Your Data
 
-Create a `_data` directory with YAML and BibTeX files for different aspects of your CV:
+Create a directory (e.g., `my_cv_data/`) with YAML and BibTeX files for different aspects of your CV:
 
 ```
-_data/
-├── authinfo.yaml         # Your personal information
-├── positions.yml         # Academic positions
-├── education.yml         # Educational background
+my_cv_data/
+├── layout.yml           # CV layout configuration (required)
+├── authinfo.yaml        # Your personal information (required)
+├── positions.yml        # Academic positions
+├── education.yml        # Educational background
 ├── visits.yml           # Research visits
+├── teaching.yaml        # Teaching experience
+├── seminars.yaml        # Seminar talks
+├── workshops.yaml       # Workshop attendance
+├── achievements.yaml    # Awards and honors
+├── refereeing.yml       # Journal reviewing
+├── references.yml       # References
 ├── short_author.bib     # Your publications (BibTeX)
 ├── sxs.bib              # Collaboration publications (optional)
 └── lvk.bib              # Collaboration publications (optional)
@@ -132,67 +141,9 @@ The package now supports BibTeX files (`.bib`) for publications, which is the **
 
 The BibTeX parser extracts fields like `author`, `title`, `journal`, `volume`, `number`, `year`, `doi`, `eprint`, and `booktitle`.
 
-### 2. Create a LaTeX Template
+### 2. Create Layout Configuration
 
-Create a template file using Mustache syntax. The package provides special features for publications:
-
-```latex
-\documentclass{article}
-\begin{document}
-
-% Personal Information (from authinfo.yaml)
-{{#authinfo}}
-\centerline{\Large\bfseries {{name}}}
-\centerline{{{position}}}
-\centerline{{{email}} | {{website}}}
-{{/authinfo}}
-
-\section*{Positions}
-{{#positions}}
-\subsection*{ {{position}} }
-\textit{ {{institute}} } \hfill {{from-month}} {{from-year}} -- {{#to-year}}{{to-month}} {{to-year}}{{/to-year}}{{^to-year}}Present{{/to-year}}
-{{/positions}}
-
-% Publications from BibTeX files with reverse numbering
-\section*{Publications}
-{{#bib_collections}}
-\subsection*{ {{label}} }
-\setcounter{bibcount}{ {{entries_count}} }
-\begin{enumerate}
-{{#entries}}
-\item[\arabic{bibcount}.] {{author_abbr}} ``{{title}}.''
-{{#journal}}\textit{ {{journal}} }, {{/journal}}{{year}}.
-{{#doi}}\href{https://doi.org/{{doi}}}{ {{doi}} }{{/doi}}
-\addtocounter{bibcount}{-1}
-{{/entries}}
-\end{enumerate}
-{{/bib_collections}}
-
-\end{document}
-```
-
-**New template features:**
-- `{{authinfo}}` - Access personal information from `authinfo.yaml`
-- `{{#bib_collections}}` - Iterate over BibTeX file collections
-- `{{entries_count}}` - Number of entries in each collection
-- `{{author_abbr}}` - Pre-formatted, abbreviated author list with optional highlighting
-- Reverse numbering support with LaTeX counters
-
-### 3. Build Your CV
-
-```julia
-using AcademicCV
-
-# Build CV with layout customization
-pdf_file = build_cv_with_layout(
-    "_data",                              # Data directory
-    "templates/sections",                 # Section templates directory
-    "templates/cv_template_base.tex",    # Base template file
-    "output"                              # Output directory
-)
-```
-
-**Customize your CV layout** by editing `_data/layout.yml`:
+Create a `layout.yml` file in your data directory to control which sections appear and in what order:
 
 ```yaml
 sections:
@@ -200,22 +151,115 @@ sections:
     enabled: true
     title: Professional Experience
   
+  - id: education
+    enabled: true
+    title: Education
+  
   - id: publications
     enabled: true
     title: Publications
   
-  - id: education
-    enabled: false    # Exclude this section
-    title: Education
+  - id: teaching
+    enabled: true
+    title: Teaching Experience
+  
+  - id: seminars
+    enabled: true
+    title: Invited Talks
 ```
 
-See [LAYOUT_GUIDE.md](LAYOUT_GUIDE.md) for detailed customization options.
+See [LAYOUT_GUIDE.md](LAYOUT_GUIDE.md) for all available sections and customization options.
+
+### 3. Build Your CV
+
+Create a simple build script (or copy [build_cv.jl](build_cv.jl) from this repository):
+
+```julia
+using AcademicCV
+
+# Build CV using bundled templates - no need to manage LaTeX files!
+pdf_file = build_cv_from_data(
+    "my_cv_data",           # Your data directory
+    output_dir="output"     # Where to save the output
+)
+
+println("CV generated: $pdf_file")
+```
+
+That's it! The package uses professionally designed templates that are bundled with it. You only need to maintain your YAML data files.
+
+#### Advanced: Using Custom Templates
+
+If you need to customize the LaTeX templates, you can still use the full API:
+
+```julia
+build_cv_with_layout(
+    "my_cv_data",                         # Data directory
+    "my_templates/sections",              # Custom section templates directory
+    "my_templates/cv_template_base.tex",  # Custom base template file
+    "output"                              # Output directory
+)
+```
+
+## Using from Other Projects
+
+To use AcademicCV.jl from another project/repository:
+
+1. **Install the package** (if using a local clone):
+   ```julia
+   using Pkg
+   Pkg.add(path="/path/to/AcademicCV.jl")
+   ```
+
+2. **Create your data directory** with YAML files and `layout.yml`
+
+3. **Create a build script** (copy [build_cv.jl](build_cv.jl) to your project):
+   ```julia
+   using AcademicCV
+   pdf_file = build_cv_from_data("my_cv_data")
+   ```
+
+4. **Run the script**:
+   ```bash
+   julia build_cv.jl
+   ```
+
+**No need to copy template files** - they're bundled with the package!
 
 ## API Reference
 
+### `build_cv_from_data` (Recommended)
+
+Build a CV using the bundled templates. This is the simplest way to use the package - you only need to provide your YAML data files.
+
+```julia
+build_cv_from_data(
+    data_dir::String;
+    output_dir::String="./output",
+    tex_filename::String="cv.tex",
+    compile::Bool=true,
+    engine::String="pdflatex"
+)
+```
+
+**Arguments:**
+- `data_dir::String`: Directory containing your YAML data files and `layout.yml`
+- `output_dir::String`: Directory where output files will be saved (default: `"./output"`)
+- `tex_filename::String`: Name of the generated TeX file (default: `"cv.tex"`)
+- `compile::Bool`: Whether to compile the TeX file to PDF (default: `true`)
+- `engine::String`: LaTeX engine to use (default: `"pdflatex"`)
+
+**Returns:** Path to the generated PDF file (if `compile=true`) or TeX file (if `compile=false`)
+
+**Example:**
+```julia
+using AcademicCV
+pdf_file = build_cv_from_data("my_cv_data")
+```
+
 ### `build_cv_with_layout`
 
-Build a CV using layout-based customization (recommended).
+Build a CV using custom templates and layout-based customization.
 
 ```julia
 build_cv_with_layout(
@@ -229,19 +273,24 @@ build_cv_with_layout(
     engine::String="pdflatex"
 )
 ```
-build_cv(data_dir, template_file, output_dir="./output"; 
-         tex_filename="cv.tex", compile=true, engine="pdflatex")
-```
 
 **Arguments:**
 - `data_dir::String`: Directory containing YAML data files
-- `template_file::String`: Path to the LaTeX template file
+- `sections_dir::String`: Directory containing section template files (`.tex` files)
+- `base_template::String`: Path to the base LaTeX template file
 - `output_dir::String`: Directory where output files will be saved (default: `"./output"`)
+- `layout_file::String`: Path to layout configuration file (default: `data_dir/layout.yml`)
 - `tex_filename::String`: Name of the generated TeX file (default: `"cv.tex"`)
 - `compile::Bool`: Whether to compile the TeX file to PDF (default: `true`)
 - `engine::String`: LaTeX engine to use (default: `"pdflatex"`)
 
 **Returns:** Path to the generated PDF file (if `compile=true`) or TeX file (if `compile=false`)
+
+### `build_cv` (Legacy)
+
+Build a CV using a single template file (older API, kept for compatibility).
+
+```julia
 
 ### Data Processing Features
 

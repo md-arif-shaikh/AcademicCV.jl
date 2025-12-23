@@ -1,0 +1,8 @@
+\setcounter{workshopcount}{ {{workshops_count}} }
+\begin{CVContent}
+\begin{enumerate}[label=\arabic{workshopcount}., leftmargin=*]
+{{#workshops}}
+\item[\arabic{workshopcount}.] {{#conference-url}}\href{ {{&conference-url}} }{``{{&conference}}''}{{/conference-url}}{{^conference-url}}``{{&conference}}''{{/conference-url}}, {{#institute-url}}\href{ {{&institute-url}} }{ {{&institute}} }{{/institute-url}}{{^institute-url}}{{&institute}}{{/institute-url}}, {{&city}}, {{&country}}, {{&date_range}} \addtocounter{workshopcount}{-1}
+{{/workshops}}
+\end{enumerate}
+\end{CVContent}
