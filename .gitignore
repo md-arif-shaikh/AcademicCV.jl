@@ -13,6 +13,7 @@
 *.fls
 *.fdb_latexmk
 *.synctex.gz
+*.xdv
 
 # Output files (generated on-the-fly)
 /examples/output/*
