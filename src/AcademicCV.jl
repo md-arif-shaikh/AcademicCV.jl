@@ -119,6 +119,22 @@ function load_data(data_dir::String)
         key = replace(file, r"\.(yml|yaml)$" => "")
         yaml_content = YAML.load_file(filepath; dicttype=OrderedDict)
         yaml_content = normalize(yaml_content)
+        
+        # Add is_plural flag before sanitization for items with number field
+        if isa(yaml_content, AbstractDict) && !isempty(yaml_content)
+            for (k, v) in yaml_content
+                if isa(v, AbstractDict) && haskey(v, "number")
+                    v["is_plural"] = (v["number"] > 1)
+                end
+            end
+        elseif isa(yaml_content, AbstractVector)
+            for item in yaml_content
+                if isa(item, AbstractDict) && haskey(item, "number")
+                    item["is_plural"] = (item["number"] > 1)
+                end
+            end
+        end
+        
         yaml_content = sanitize(yaml_content)
 
         if isa(yaml_content, AbstractVector)
@@ -220,8 +236,15 @@ function load_data(data_dir::String)
             end
         end
 
+        # Mark the last collection for template rendering
+        for (i, c) in enumerate(ordered)
+            c["is_last"] = (i == length(ordered))
+        end
+        
         data["bib_collections"] = ordered
         data["bib_collections_count"] = length(ordered)
+        # Calculate total number of publications across all collections
+        data["total_publications"] = sum(c["entries_count"] for c in ordered)
     end
     
     return data
@@ -446,10 +469,18 @@ function build_cv_with_layout(data_dir::String, sections_dir::String, base_templ
                 continue
             end
             
+            # Create section-specific data context by merging section options with global data
+            section_data = copy(data)
+            for (key, value) in section
+                if key != "id" && key != "enabled" && key != "title"
+                    section_data[key] = value
+                end
+            end
+            
             # Read and render section template with data
             section_template_content = read(section_template_path, String)
             section_template = Mustache.parse(section_template_content)
-            rendered_section = Mustache.render(section_template, data)
+            rendered_section = Mustache.render(section_template, section_data)
             
             # Add section header and rendered content
             sections_content *= "\\CVSection{$title}\n"

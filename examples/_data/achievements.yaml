@@ -1,0 +1,80 @@
+LISA-membership:
+  description: Core member
+  organization: LISA Consortium
+  organization-website: "https://www.lisamission.org/"
+  year: 2025--
+NPDF:
+  description: Offer for National Postdoctoral Fellowship (NPDF)
+  organization: Science and Engineering Research Board (SERB), Government of India.
+  organization-website: https://serbonline.in/SERB/HomePage
+  year: 2024
+KAS-membership:
+  description: Membership
+  organization: Korean Astronomical Society
+  organization-website: http://www.kas.org/
+  year: 2023--
+SXS-membership:
+  description: Membership
+  organization: Simulating eXtreme Spacetime (SXS)
+  organization-website: https://www.black-holes.org/
+  year: 2021--
+LIGO-membership:
+  description: Membership
+  organization: LIGO Scientific Collaboration
+  organization-website: https://www.ligo.org/
+  year: 2020--
+SRF:
+  description: Senior Research Fellowship
+  organization: Department of Atomic Energy, Government of India
+  organization-website:
+  year: 2014--2018
+JRF:
+  description: Junior Research Fellowship
+  organization: Department of Atomic Energy, Government of India
+  organization-website:
+  year: 2012--2014
+PhD:
+  description: Offer for Phd in Physics starting from 2014
+  organization: IUCAA, pune
+  organization-website:
+  year: 2012
+IPhD-NCRA:
+  description: Offer for Integrated Phd in Physics
+  organization: NCRA-TIFR, Pune
+  organization-website:
+  year: 2012
+IPhD-IISc:
+  description: Offer for Integrated Phd in Physics
+  organization: IISc, Bangalore
+  organization-website:
+  year: 2012
+IITB-MSC:
+  description: Offer for MSc in Physics
+  organization: IIT Bombay
+  organization-website:
+  year: 2012
+JEST-2012:
+  description: AIR 41 in Joint Entrance Screening Test (JEST)
+  organization: JEST
+  organization-website: https://www.jest.org.in/joint-entrance-screening-test
+  year: 2012
+JAM-2012:
+  description: AIR 43 in Joint Admission Test for M.Sc (JAM)
+  organization: IIT Bombay
+  organization-website:
+  year: 2012
+Inspire-fellowship-BSc:
+  description: INSPIRE Fellowship
+  organization: Department of Science and Technology, Government of India
+  organization-website:
+  year: 2009--2012
+HS-rank:
+  description: Ranked within top 20 in higher secondary examination
+  organization: West Bengal Council of Higher Secondary Education
+  organization-website:
+  year: 2009
+MP-first-rank:
+  description: First rank in secondary examination
+  organization: West Bengal Board of Secondary Education
+  organization-website:
+  year: 2007

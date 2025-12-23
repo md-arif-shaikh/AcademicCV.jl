@@ -14,22 +14,18 @@ sections:
     enabled: true
     title: Education
   
+  - id: achievements
+    enabled: true
+    title: Awards, Fellowships \& Memberships
+  
   - id: publications
     enabled: true
     title: Publications
   
-  - id: visits
-    enabled: true
-    title: Research Visits
-  
   - id: seminars
     enabled: true
     title: Seminars
-  
-  - id: workshops
-    enabled: true
-    title: Workshops
-  
+
   - id: conference-talks
     enabled: true
     title: Conference Talks
@@ -37,7 +33,20 @@ sections:
   - id: conference-posters
     enabled: true
     title: Conference Posters
+
+  - id: workshops
+    enabled: true
+    title: Workshops
+
+  - id: visits
+    enabled: true
+    title: Research Visits
   
+  - id: refereeing
+    enabled: true
+    title: Refereeing
+    show_numbers: false
+    
   - id: references
     enabled: true
     title: References
