@@ -49,75 +49,8 @@ function load_data(data_dir::String)
         end
     end
 
-    # Helper to remove simple LaTeX commands and braces from strings
-    function strip_tex(s)
-        if !isa(s, String)
-            return s
-        end
-        out = s
-        # Convert common LaTeX accent commands to Unicode combining marks
-        function latex_accents_to_utf8(str)
-            # Map common LaTeX accent commands to precomposed Unicode characters
-            acc_map = Dict{
-                Char, Dict{Char,String}
-            }()
-
-            # Diaeresis (\")
-            acc_map['"'] = Dict('a'=>"ä", 'e'=>"ë", 'i'=>"ï", 'o'=>"ö", 'u'=>"ü", 'y'=>"ÿ",
-                                 'A'=>"Ä", 'E'=>"Ë", 'I'=>"Ï", 'O'=>"Ö", 'U'=>"Ü", 'Y'=>"Ÿ")
-            # Acute (\')
-            acc_map['\''] = Dict('a'=>"á", 'e'=>"é", 'i'=>"í", 'o'=>"ó", 'u'=>"ú", 'y'=>"ý",
-                                  'A'=>"Á", 'E'=>"É", 'I'=>"Í", 'O'=>"Ó", 'U'=>"Ú", 'Y'=>"Ý")
-            # Grave (`)
-            acc_map['`'] = Dict('a'=>"à", 'e'=>"è", 'i'=>"ì", 'o'=>"ò", 'u'=>"ù",
-                                'A'=>"À", 'E'=>"È", 'I'=>"Ì", 'O'=>"Ò", 'U'=>"Ù")
-            # Circumflex (^)
-            acc_map['^'] = Dict('a'=>"â", 'e'=>"ê", 'i'=>"î", 'o'=>"ô", 'u'=>"û",
-                                'A'=>"Â", 'E'=>"Ê", 'I'=>"Î", 'O'=>"Ô", 'U'=>"Û")
-            # Tilde (~)
-            acc_map['~'] = Dict('n'=>"ñ", 'a'=>"ã", 'o'=>"õ",
-                                'N'=>"Ñ", 'A'=>"Ã", 'O'=>"Õ")
-            # Cedilla (c)
-            acc_map['c'] = Dict('c'=>"ç", 'C'=>"Ç")
-            # Caron (v)
-            acc_map['v'] = Dict('c'=>"č", 's'=>"š", 'z'=>"ž",
-                                'C'=>"Č", 'S'=>"Š", 'Z'=>"Ž")
-            # Double acute (H)
-            acc_map['H'] = Dict('o'=>"ő", 'u'=>"ű", 'O'=>"Ő", 'U'=>"Ű")
-            # Ring (r)
-            acc_map['r'] = Dict('a'=>"å", 'A'=>"Å")
-            # Dot above (.)
-            acc_map['.'] = Dict('e'=>"ė", 'E'=>"Ė")
-            # Macron (=)
-            acc_map['='] = Dict('a'=>"ā", 'e'=>"ē", 'i'=>"ī", 'o'=>"ō", 'u'=>"ū",
-                                'A'=>"Ā", 'E'=>"Ē", 'I'=>"Ī", 'O'=>"Ō", 'U'=>"Ū")
-
-            out2 = str
-            # Replace patterns like \"{u} and \"u with precomposed characters when available
-            for (cmd, cmap) in acc_map
-                for (L, rep) in cmap
-                    pat1 = "\\" * string(cmd) * "{" * string(L) * "}"
-                    pat2 = "\\" * string(cmd) * string(L)
-                    out2 = replace(out2, pat1 => rep)
-                    out2 = replace(out2, pat2 => rep)
-                end
-            end
-
-            # For any remaining simple accent commands that we don't recognize, strip the command and keep the letter
-            out2 = replace(out2, r"\\.\{([A-Za-z])\}" => m-> m.captures[1])
-            out2 = replace(out2, r"\\([A-Za-z])" => m-> m.captures[1])
-
-            return out2
-        end
-
-        out = latex_accents_to_utf8(out)
-        # Replace only safe text-like macros (e.g., \textit{...}, \emph{...}) by their contents
-        out = replace(out, r"\\(?:textit|textbf|emph|itshape)\{([^}]*)\}" => s-> s.captures[1])
-        # Remove remaining braces and leftover backslashes
-        out = replace(out, r"[{}]" => "")
-        out = replace(out, "\\" => "")
-        return out
-    end
+    # `strip_tex` and other formatting helpers are provided by `Formatting.jl`.
+    # AcademicCV uses those exported helpers via `using .Formatting` at the module top.
 
     # YAML loading and sanitization handled in Formatting.jl
 
