@@ -156,12 +156,15 @@ function sanitize(obj)
     if isa(obj, AbstractDict)
         out = OrderedDict()
         for (k,v) in obj
+            # Convert key to string for safe comparison
+            key_str = string(k)
+            
             if isa(v, String)
-                if k == "author_abbr"
+                if key_str == "author_abbr"
                     out[k] = v
-                elseif occursin("website", k) || occursin("url", k) || k == "website"
+                elseif occursin("website", key_str) || occursin("url", key_str) || key_str == "website"
                     out[k] = html_unescape(v)
-                elseif k == "doi"
+                elseif key_str == "doi"
                     cleaned = html_unescape(v)
                     out["doi"] = cleaned
                     out["doi_url"] = cleaned
