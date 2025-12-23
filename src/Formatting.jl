@@ -175,6 +175,9 @@ function sanitize(obj)
                     out["doi_url"] = cleaned
                     out["doi_display"] = escape_latex(cleaned)
                     out["doi_full_url"] = "https://doi.org/" * cleaned
+                elseif key_str == "name" && occursin("\\", v)
+                    # If name contains backslash, assume it has LaTeX commands - don't escape
+                    out[k] = v
                 else
                     out[k] = escape_latex(v)
                 end
