@@ -1,8 +1,0 @@
-\setcounter{seminarcount}{ {{seminars_count}} }
-\begin{CVContent}
-\begin{enumerate}[label=\arabic{seminarcount}., leftmargin=*]
-{{#seminars}}
-\item[\arabic{seminarcount}.] {{#talk-url}}\href{ {{&talk-url}} }{``{{&title}}''}{{/talk-url}}{{^talk-url}}``{{&title}}''{{/talk-url}}, {{#institute-url}}\href{ {{&institute-url}} }{ {{&institute}} }{{/institute-url}}{{^institute-url}}{{&institute}}{{/institute-url}}, {{&city}}, {{&country}}, {{&date_range}} \addtocounter{seminarcount}{-1}
-{{/seminars}}
-\end{enumerate}
-\end{CVContent}
