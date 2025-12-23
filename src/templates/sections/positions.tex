@@ -1,7 +1,7 @@
 {{#positions}}
 \begin{CVContent}
 {\bfseries {{position}}} \hfill {{{from-month}} {{from-year}} -- {{#to-year}}{{to-month}} {{to-year}}{{/to-year}}{{^to-year}}Present{{/to-year}}}\\
-{\itshape {{#department-website}}\href{ {{&department-website}} }{ {{&department}} }{{/department-website}}{{^department-website}}{{&department}}{{/department-website}}, {{#institute-website}}\href{ {{&institute-website}} }{ {{&institute}} }{{/institute-website}}{{^institute-website}}{{&institute}}{{/institute-website}}}\\
+{\itshape {{#department-website}}\href{ {{&department-website}} }{ {{&department}}}{{/department-website}}{{^department-website}}{{&department}}{{/department-website}}, {{#institute-website}}\href{ {{&institute-website}} }{ {{&institute}}}{{/institute-website}}{{^institute-website}}{{&institute}}{{/institute-website}}}\\
 {{&institute-address}}
 {{#advisors}}
 \\ {\itshape Advisor: }{{#website}}\href{ {{&website}} }{ {{name}} }{{/website}}{{^website}}{{name}}{{/website}}
