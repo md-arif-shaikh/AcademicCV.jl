@@ -1,0 +1,27 @@
+# CV Layout Configuration
+# This file defines which sections appear in your CV and in what order
+# Each section should have:
+#   - id: unique identifier matching data file or special section name
+#   - enabled: true/false to include/exclude the section
+#   - title: display title for the section (optional, uses id if not specified)
+
+sections:
+  - id: positions
+    enabled: true
+    title: Positions
+  
+  - id: education
+    enabled: true
+    title: Education
+  
+  - id: publications
+    enabled: true
+    title: Publications
+  
+  - id: visits
+    enabled: true
+    title: Research Visits
+  
+  - id: references
+    enabled: true
+    title: References

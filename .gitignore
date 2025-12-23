@@ -14,10 +14,9 @@
 *.fdb_latexmk
 *.synctex.gz
 
-# Output files (but keep example output for reference)
-/examples/output/*.pdf
-/examples/output/*.aux
-/examples/output/*.log
+# Output files (generated on-the-fly)
+/examples/output/*
+!.gitkeep
 
 # OS
 .DS_Store

@@ -3,20 +3,22 @@
 [![CI](https://github.com/md-arif-shaikh/AcademicCV.jl/actions/workflows/CI.yml/badge.svg)](https://github.com/md-arif-shaikh/AcademicCV.jl/actions/workflows/CI.yml)
 [![Build CV](https://github.com/md-arif-shaikh/AcademicCV.jl/actions/workflows/build-cv.yml/badge.svg)](https://github.com/md-arif-shaikh/AcademicCV.jl/actions/workflows/build-cv.yml)
 
-A Julia package for building academic CVs from YAML data files and LaTeX templates.
+A Julia package for building academic CVs from YAML data files and LaTeX templates with customizable layouts.
 
-📄 **[View Example LaTeX Output](examples/output/cv.tex)** - See the generated LaTeX file  
-📥 **Download Example PDF** - Will be available in the [cv-output branch](../../tree/cv-output) after merging to main
+📄 **[View Example LaTeX Output](examples/output/cv.tex)** - Generated on-the-fly  
+📥 **Download Example PDF** - Available in the [cv-output branch](../../tree/cv-output)  
+📖 **[Layout Customization Guide](LAYOUT_GUIDE.md)** - Learn how to customize your CV sections
 
 ## Features
 
-- 📄 Load academic data from YAML files (positions, education, visits, etc.)
+- 📄 Load academic data from YAML files (positions, education, visits, references, etc.)
 - 📚 Parse BibTeX files for publications with automatic formatting
+- 🎨 **Layout-based customization** - Control which sections appear and in what order
 - 📝 Generate LaTeX files using Mustache templates
 - 🔧 Compile LaTeX to PDF automatically
 - 🚀 Easy integration with GitHub Actions for automated CV generation
 - 🎨 Modern, professional template with clean typography and color accents
-- 🔄 Customizable templates for different CV styles
+- 🔄 Modular section templates for easy customization
 - ✨ Author name abbreviation and highlighting in publications
 - 🛡️ Automatic LaTeX sanitization and HTML entity decoding
 
@@ -181,21 +183,52 @@ Create a template file using Mustache syntax. The package provides special featu
 ```julia
 using AcademicCV
 
-# Build CV from YAML data
-pdf_file = build_cv(
-    "_data",                    # Data directory
-    "cv_template.tex",          # Template file
-    "output"                    # Output directory
+# Build CV with layout customization
+pdf_file = build_cv_with_layout(
+    "_data",                              # Data directory
+    "templates/sections",                 # Section templates directory
+    "templates/cv_template_base.tex",    # Base template file
+    "output"                              # Output directory
 )
 ```
 
+**Customize your CV layout** by editing `_data/layout.yml`:
+
+```yaml
+sections:
+  - id: positions
+    enabled: true
+    title: Professional Experience
+  
+  - id: publications
+    enabled: true
+    title: Publications
+  
+  - id: education
+    enabled: false    # Exclude this section
+    title: Education
+```
+
+See [LAYOUT_GUIDE.md](LAYOUT_GUIDE.md) for detailed customization options.
+
 ## API Reference
 
-### `build_cv`
+### `build_cv_with_layout`
 
-Main function to build a CV from YAML data files.
+Build a CV using layout-based customization (recommended).
 
 ```julia
+build_cv_with_layout(
+    data_dir::String,
+    sections_dir::String,
+    base_template::String,
+    output_dir::String="./output";
+    layout_file::String="",           # Defaults to data_dir/layout.yml
+    tex_filename::String="cv.tex",
+    compile::Bool=true,
+    engine::String="pdflatex"
+)
+```
 build_cv(data_dir, template_file, output_dir="./output"; 
          tex_filename="cv.tex", compile=true, engine="pdflatex")
 ```

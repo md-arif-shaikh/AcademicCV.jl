@@ -1,0 +1,60 @@
+phd-advisor:
+  name: Tapas Kumar Das
+  position: Professor
+  website: http://www.hri.res.in/~tapas/
+  institute: Harish-Chandra Research Institute
+  institute-website: http://www.hri.res.in/
+  institute-address: Chhatnag Road, Jhunsi, Prayagraj, 211019, Uttar Pradesh, India
+  email: tapas@hri.res.in
+  phone: +91 5322274321
+  relation: Phd Advisor
+Ajith:
+  name: Parameswaran Ajith
+  position: Professor
+  website: https://home.icts.res.in/~ajith/Home.html
+  institute: International Centre for Theoretical Sciences
+  institute-website: "https://www.icts.res.in/"
+  institute-address: Hesaraghatta Hobli, Karnataka, 560089, India
+  email: ajith@icts.res.in
+  phone: +91 8046536210
+  relation: Postdoc mentor
+HyungMok:
+  name: Hyung Mok Lee
+  position: Professor
+  website: http://astro.snu.ac.kr/~hmlee/
+  institute: Seoul National University
+  institute-website: "https://en.snu.ac.kr/"
+  institute-address: 1 Gwanak-ro, Gwanak-gu, Seoul 08826, Korea
+  email: hmlee@snu.ac.kr
+  phone: 82-2-880-6625
+  relation: Postdoc mentor
+Shasvath:
+  name: Shasvath Kapadia
+  website:
+  position: Assistant Professor
+  institute: Inter-University Centre for Astronomy and Astrophysics
+  institute-website: "https://www.iucaa.in/"
+  institute-address: Post Bag 4, Ganeshkhind, Pune, Maharashtra 411007, India
+  email: shasvath.kapadia@iucaa.in, shasvath.j.kapadia@gmail.com
+  phone:
+  relation:
+Vijay:
+  name: Vijay Varma
+  website: https://vijayvarma.com/
+  position: Assistant Professor
+  institute: University of Massachusetts
+  institute-website: https://www.umassd.edu/
+  institute-address: Dartmouth, USA
+  email: vijay.varma392@gmail.com
+  phone:
+  relation:
+Prayush:
+  name: Prayush Kumar
+  website:
+  position: Reader
+  institute: International Centre for Theoretical Sciences
+  institute-website: "https://www.icts.res.in/"
+  institute-address: Hesaraghatta Hobli, Karnataka, 560089, India
+  email: prayush@icts.res.in
+  phone: +91 8046536390
+  relation:

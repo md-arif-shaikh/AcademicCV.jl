@@ -10,7 +10,7 @@ include("BibTools.jl")
 using .Formatting: escape_latex, strip_tex, abbreviate_name, build_author_abbr, html_unescape, sanitize
 using .BibTools: parse_bib_file
 
-export build_cv, load_data, generate_latex, compile_pdf
+export build_cv, load_data, generate_latex, compile_pdf, build_cv_with_layout
 
 """
     load_data(data_dir::String)
@@ -296,6 +296,106 @@ function build_cv(data_dir::String, template_file::String, output_dir::String=".
     tex_output = joinpath(output_dir, tex_filename)
     println("Generating LaTeX file...")
     generate_latex(data, template_file, tex_output)
+    
+    # Compile to PDF if requested
+    if compile
+        println("Compiling PDF...")
+        pdf_file = compile_pdf(tex_output; engine=engine)
+        return pdf_file
+    else
+        return tex_output
+    end
+end
+
+"""
+    build_cv_with_layout(data_dir::String, sections_dir::String, base_template::String, 
+                         output_dir::String="./output"; layout_file::String="",
+                         tex_filename::String="cv.tex", compile::Bool=true, 
+                         engine::String="pdflatex")
+
+Build a CV using a layout configuration file to customize section ordering and inclusion.
+
+# Arguments
+- `data_dir::String`: Directory containing YAML data files
+- `sections_dir::String`: Directory containing section template files
+- `base_template::String`: Path to the base LaTeX template file
+- `output_dir::String`: Directory where output files will be saved (default: "./output")
+- `layout_file::String`: Path to layout.yml file (default: searches in data_dir)
+- `tex_filename::String`: Name of the generated TeX file (default: "cv.tex")
+- `compile::Bool`: Whether to compile the TeX file to PDF (default: true)
+- `engine::String`: LaTeX engine to use (default: "pdflatex")
+
+# Returns
+- Path to the generated PDF file (if compile=true) or TeX file (if compile=false)
+"""
+function build_cv_with_layout(data_dir::String, sections_dir::String, base_template::String, 
+                               output_dir::String="./output"; layout_file::String="",
+                               tex_filename::String="cv.tex", compile::Bool=true, 
+                               engine::String="pdflatex")
+    # Create output directory if it doesn't exist
+    if !isdir(output_dir)
+        mkpath(output_dir)
+    end
+    
+    # Determine layout file path
+    if isempty(layout_file)
+        layout_file = joinpath(data_dir, "layout.yml")
+    end
+    
+    if !isfile(layout_file)
+        error("Layout file does not exist: $layout_file")
+    end
+    
+    # Load layout configuration
+    println("Loading layout from $layout_file...")
+    layout = YAML.load_file(layout_file; dicttype=OrderedDict)
+    
+    # Load data from YAML files
+    println("Loading data from $data_dir...")
+    data = load_data(data_dir)
+    println("Loaded data for: $(join(keys(data), ", "))")
+    
+    # Build sections based on layout
+    println("Building sections based on layout...")
+    sections_content = ""
+    
+    if haskey(layout, "sections")
+        for section in layout["sections"]
+            section_id = get(section, "id", "")
+            enabled = get(section, "enabled", true)
+            title = get(section, "title", section_id)
+            
+            if !enabled || isempty(section_id)
+                continue
+            end
+            
+            # Check if section template exists
+            section_template_path = joinpath(sections_dir, "$(section_id).tex")
+            
+            if !isfile(section_template_path)
+                println("Warning: Section template not found: $section_template_path")
+                continue
+            end
+            
+            # Read and render section template with data
+            section_template_content = read(section_template_path, String)
+            section_template = Mustache.parse(section_template_content)
+            rendered_section = Mustache.render(section_template, data)
+            
+            # Add section header and rendered content
+            sections_content *= "\\CVSection{$title}\n"
+            sections_content *= rendered_section
+            sections_content *= "\n\n"
+        end
+    end
+    
+    # Add sections content to data
+    data["cv_sections"] = sections_content
+    
+    # Generate LaTeX file
+    tex_output = joinpath(output_dir, tex_filename)
+    println("Generating LaTeX file...")
+    generate_latex(data, base_template, tex_output)
     
     # Compile to PDF if requested
     if compile

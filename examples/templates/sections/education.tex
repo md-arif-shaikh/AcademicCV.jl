@@ -1,0 +1,15 @@
+{{#education}}
+\begin{CVContent}
+{\bfseries {{degree}}} \hfill {{from-month}} {{from-year}} -- {{#to-year}}{{to-month}} {{to-year}}{{/to-year}}{{^to-year}}Present{{/to-year}}\\
+{\itshape {{#institute-website}}\href{ {{&institute-website}} }{ {{&institute}} }{{/institute-website}}{{^institute-website}}{{&institute}}{{/institute-website}}}\\
+{{&institute-address}}
+{{#department}}
+\\ {{#department-website}}\href{ {{&department-website}} }{ {{&department}} }{{/department-website}}{{^department-website}}{{&department}}{{/department-website}}
+{{/department}}
+{{#advisor}}
+\\ {\itshape Advisor:} {{&advisor}}{{#advisor-email}} (\href{mailto:{{advisor-email}}}{{{advisor-email}}}){{/advisor-email}}%
+{{/advisor}}
+
+\vspace{0.5em}
+\end{CVContent}
+{{/education}}
