@@ -163,7 +163,7 @@ function sanitize(obj)
                 if key_str == "author_abbr"
                     # Don't escape - author abbreviations are pre-formatted
                     out[k] = v
-                elseif key_str == "conference" || key_str == "title"
+                elseif key_str == "conference" || key_str == "title" || key_str == "course"
                     # Escape special characters but preserve already-escaped LaTeX commands
                     # Only escape underscores, the rest should be handled properly
                     out[k] = replace(v, "_" => raw"\_")

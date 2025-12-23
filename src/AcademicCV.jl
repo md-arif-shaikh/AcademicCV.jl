@@ -54,6 +54,44 @@ function load_data(data_dir::String)
 
     # Helper function to format date ranges intelligently
     function format_date_range!(item::AbstractDict)
+        # Handle ISO date range with from/to fields (e.g., for teaching)
+        if haskey(item, "from") && haskey(item, "to") && !haskey(item, "from-month")
+            from_str = string(get(item, "from", ""))
+            to_str = string(get(item, "to", ""))
+            
+            # Parse ISO dates
+            if occursin(r"^\d{4}-\d{2}-\d{2}$", from_str) && occursin(r"^\d{4}-\d{2}-\d{2}$", to_str)
+                from_parts = split(from_str, "-")
+                to_parts = split(to_str, "-")
+                
+                from_year = from_parts[1]
+                from_month_num = parse(Int, from_parts[2])
+                from_day = parse(Int, from_parts[3])
+                
+                to_year = to_parts[1]
+                to_month_num = parse(Int, to_parts[2])
+                to_day = parse(Int, to_parts[3])
+                
+                months = ["January", "February", "March", "April", "May", "June", 
+                         "July", "August", "September", "October", "November", "December"]
+                
+                from_month = months[from_month_num]
+                to_month = months[to_month_num]
+                
+                # Format based on same/different month and year
+                if from_year == to_year
+                    if from_month == to_month
+                        item["date_range"] = "$from_month $from_day--$to_day, $from_year"
+                    else
+                        item["date_range"] = "$from_month $from_day--$to_month $to_day, $from_year"
+                    end
+                else
+                    item["date_range"] = "$from_month $from_day, $from_year--$to_month $to_day, $to_year"
+                end
+            end
+            return item
+        end
+        
         # Handle single date field (e.g., for seminars)
         if haskey(item, "date") && !haskey(item, "from-month")
             date_str = string(get(item, "date", ""))

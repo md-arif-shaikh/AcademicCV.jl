@@ -42,6 +42,10 @@ sections:
     enabled: true
     title: Research Visits
   
+  - id: teaching
+    enabled: true
+    title: Teaching
+  
   - id: refereeing
     enabled: true
     title: Refereeing

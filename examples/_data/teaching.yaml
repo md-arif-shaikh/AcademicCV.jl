@@ -1,0 +1,132 @@
+icts-summer-school-2021:
+  course: Stochastic gravitational wave background from early universe
+  school: Summer School on Gravitational Wave Astronomy
+  school-website: https://www.icts.res.in/program/gws2021
+  institute: ICTS-TIFR
+  institute-website: https://www.icts.res.in
+  city: Bangalore
+  country: India
+  from: 2021-07-05
+  to: 2021-07-16
+  role: Tutor
+  instructor:
+    name: Shi Pi
+    website:
+    institute: KIPMU
+    institute-website: https://www.ipmu.jp/
+    city: Tokyo
+    country: Japan
+
+icts-intro-GR-2020:
+  course: Introduction to General Relativity
+  school: Graduate semester course
+  school-website:
+  institute: ICTS-TIFR
+  institute-website: https://www.icts.res.in
+  city: Bangalore
+  country: India
+  from: 2020-08-01
+  to: 2020-12-31
+  role: Tutor
+  instructor:
+    name: Bala Iyear
+    website:
+    institute: ICTS-TIFR
+    institute-website: https://www.icts.res.in
+    city: Bangalore
+    country: India
+
+icts-bilby-workshop-2020:
+  course: Parameter estimation with bilby
+  school: ICTS workshop
+  school-website: https://github.com/GregoryAshton/GWParameterEstimationWorkshop2020/
+  institute: ICTS-TIFR
+  institute-website: https://www.icts.res.in
+  city: Bangalore
+  country: India
+  from: 2020-08-27
+  to: 2020-08-28
+  role: Tutor
+  instructor:
+    name: Gregory Ashton
+    website: https://gregoryashton.github.io/
+    institute: Royal Holloway, University of London
+    institute-website: https://www.royalholloway.ac.uk/research-and-teaching/departments-and-schools/physics/
+    city: London
+    country: UK
+
+icts-summer-school-2020:
+  course: Numerical Hydrodynamics
+  school: Summer School on Gravitational Wave Astronomy
+  school-website: https://www.icts.res.in/program/gws2020 
+  institute: ICTS-TIFR
+  institute-website: https://www.icts.res.in
+  city: Bangalore
+  country: India
+  from: 2020-05-18
+  to: 2020-06-05
+  role: Tutor
+  instructor:
+    name: Ian Hawke
+    website:
+    institute: University of Southampton
+    institute-website:
+    city: Southampton
+    country: UK
+
+icts-intro-gw-2020:
+  course: An Introduction to GW Physics \& Astronomy
+  school: Graduate semester course
+  school-website:
+  institute: ICTS-TIFR
+  institute-website: https://www.icts.res.in
+  city: Bangalore
+  country: India
+  from: 2020-01-01
+  to: 2020-04-30
+  role: Tutor
+  instructor:
+    name: P. Ajith \& Bala Iyer
+    website:
+    institute: ICTS-TIFR
+    institute-website: https://www.icts.res.in
+    city: Bangalore
+    country: India
+
+icts-summer-school-2019:
+  course: Advanced General Relativity
+  school: Summer School on Gravitational Wave Astronomy
+  school-website: https://www.icts.res.in/program/gws2019
+  institute: ICTS-TIFR
+  institute-website: https://www.icts.res.in
+  city: Bangalore
+  country: India
+  from: 2021-07-15
+  to: 2021-07-26
+  role: Tutor
+  instructor:
+    name: Sudipta Sarkar
+    website:
+    institute: IIT
+    institute-website:
+    city: Gandhinagar
+    country: India
+
+hri-stat-2016:
+  course: Statistical Physics
+  school: Graduate semester course
+  school-website:
+  institute: HRI
+  institute-website: https://www.hri.res.in
+  city: Allahabad
+  country: India
+  from: 2017-08-01
+  to: 2017-12-31
+  role: Tutor
+  instructor:
+    name: G. V. Pai
+    website:
+    institute: HRI
+    institute-website: https://www.hri.res.in
+    city: Allahabad
+    country: India
