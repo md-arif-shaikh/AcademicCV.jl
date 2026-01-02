@@ -23,6 +23,7 @@ postdoc_snu:
   advisors:
     hyungMok:
       name: Hyung Mok Lee
+      email: hmlee@snu.ac.kr
       website: http://astro.snu.ac.kr/~hmlee/
 postdoc_icts:
     position: Postdoctoral Fellow
@@ -38,4 +39,5 @@ postdoc_icts:
     advisors:
       Ajith:
         name: Parameswaran Ajith
+        email: ajith@icts.res.in
         website: https://home.icts.res.in/~ajith/Home.html

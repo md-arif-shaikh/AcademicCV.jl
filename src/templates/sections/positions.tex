@@ -4,7 +4,7 @@
 {\itshape {{#department-website}}\href{ {{&department-website}} }{ {{&department}}}{{/department-website}}{{^department-website}}{{&department}}{{/department-website}}, {{#institute-website}}\href{ {{&institute-website}} }{ {{&institute}}}{{/institute-website}}{{^institute-website}}{{&institute}}{{/institute-website}}}\\
 {{&institute-address}}
 {{#advisors}}
-\\ {\itshape Advisor: }{{#website}}\href{ {{&website}} }{ {{name}} }{{/website}}{{^website}}{{name}}{{/website}}
+\\ {\itshape Advisor: }{{#website}}\href{ {{&website}} }{ {{name}} }{{/website}}{{^website}}{{name}}{{/website}}{{#email}} (\href{mailto:{{email}}}{{=<% %>=}}{<%={{ }}=%>{{email}}}){{/email}}
 {{/advisors}}
 
 \vspace{0.5em}

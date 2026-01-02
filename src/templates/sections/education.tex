@@ -7,7 +7,7 @@
 \\ {{#department-website}}\href{ {{&department-website}} }{ {{&department}} }{{/department-website}}{{^department-website}}{{&department}}{{/department-website}}
 {{/department}}
 {{#advisor}}
-\\ {\itshape Advisor:} {{&advisor}}{{#advisor-email}} (\href{mailto:{{advisor-email}}}{{{advisor-email}}}){{/advisor-email}}%
+\\ {\itshape Advisor:} {{#advisor-website}}\href{ {{&advisor-website}} }{ {{&advisor}} }{{/advisor-website}}{{^advisor-website}}{{&advisor}}{{/advisor-website}}{{#advisor-email}} (\href{mailto:{{advisor-email}}}{{=<% %>=}}{<%={{ }}=%>{{advisor-email}}}){{/advisor-email}}%
 {{/advisor}}
 
 \vspace{0.5em}
